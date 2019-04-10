@@ -1,2 +1,2 @@
 # HPC Setup dask-jobqueue
-Collection of information that will help you setup your own jupyter notebook deployment on an HPC system
+Collection of information that will help you deploy Dask parallel computations on HPC job queuing systems with jupyter notebook interface.
