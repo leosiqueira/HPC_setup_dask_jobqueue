@@ -69,7 +69,7 @@ Create a new conda environment for our pangeo work:
     conda create -n pangeo -c conda-forge \
         python=3.6 jupyterlab nbserverproxy \
         mpi4py dask-jobqueue ipywidgets \
-        scipy netcdf4 matplotlib cartopy
+        xarray scipy netcdf4 matplotlib cartopy
 
 .. note::
 
@@ -166,6 +166,30 @@ resources on the login nodes will be terminated and the UM-CCS account responsib
 for those jobs may be suspended. This is not universal rule, but it is
 one we'll follow for this tutorial.
 
+If you are using dask-jobqueue within Jupyter, one user friendly solution to see the
+Diagnostics Dashboard is to use nbserverproxy. As the dashboard HTTP end point is 
+launched inside the same node as Jupyter, this is the solution for viewing it at
+UM-Pegasus when running within an interactive job. You just need to have it installed
+in the Python environment you use for launching the notebook, and activate it,
+
+::
+
+    jupyter serverextension enable --py nbserverproxy
+    ...
+    Enabling: nbserverproxy
+    - Writing config: /nethome/lspsiqueira/.jupyter
+    - Validating...
+      nbserverproxy  OK
+
+Then, once started, the dashboard will be accessible from your notebook URL by adding
+the path ``/proxy/8787/status``, replacing 8787 by any other port you use or the dashboard
+is bind to if needed. Sor for example:
+::
+
+http://localhost:8888/proxy/8787/status
+
+with the example below.
+
 In our case, the Pegasus super computer uses the LSF job scheduler, so typing:
 
 ::
@@ -185,3 +209,16 @@ In our case, the Pegasus super computer uses the LSF job scheduler, so typing:
   
 This will get us an interactive job on the `interactive` queue for 6 hours running jupyter server.  
 
+Now, connect to the server using an ssh tunnel from your local machine
+(this could be your laptop or desktop).
+
+::
+
+    $ ssh -N -L localhost:8888:n003:8888 username@pegasus.ccs.miami.edu
+
+You'll want to change the details in the command above but the basic idea is
+that we're passing the port 8888 from the compute node `n003` to our
+local system. Now open http://localhost:8888 on your local machine, you should
+find a jupyter server running!
+
+To access the Diagnostics Dashboard you open http://localhost:8888/proxy/8787/status.
