@@ -186,7 +186,7 @@ in the Python environment you use for launching the notebook, and activate it,
     jupyter serverextension enable --py nbserverproxy
     ...
     Enabling: nbserverproxy
-    - Writing config: /nethome/lspsiqueira/.jupyter
+    - Writing config: /nethome/$user/.jupyter
     - Validating...
       nbserverproxy  OK
 
