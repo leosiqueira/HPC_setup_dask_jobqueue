@@ -133,7 +133,16 @@ in the Jupyter documentation.
 
 Finally, we want to configure dask's dashboard to forward through Jupyter,
 instead of using ssh port forwarding. This can be done by editing the dask
-distributed config file, e.g.: ``.config/dask/distributed.yaml``. In this file, set:
+distributed config file, e.g.: ``.config/dask/distributed.yaml``. By default
+when ``dask.distributed`` and/or ``dask-jobqueue`` is first imported, it places
+a file at ``~/.config/dask/distributed.yaml`` with a commented out version.
+You can create this file and do this first import by simply 
+
+::
+
+    python -c 'from dask.distributed import Client'
+
+In this ``.config/dask/distributed.yaml`` file, set:
 
 .. code:: python
 
