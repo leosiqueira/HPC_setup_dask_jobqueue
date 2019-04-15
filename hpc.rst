@@ -222,3 +222,37 @@ local system. Now open http://localhost:8888 on your local machine, you should
 find a jupyter server running!
 
 To access the Diagnostics Dashboard you open http://localhost:8888/proxy/8787/status.
+The Dashboard has limited functionality at Pegasus nodes for now (help is welcome),
+but logs and workers load are available.
+
+.. note::
+  
+  *Sometimes at Pegasus, the jupyter server and ssh port forwarding from the computing node
+  may freeze and the user has to first kill the interacitve job, check its id number with* 
+  ``bjobs`` *and find the local machine PID linked with that port using*
+  
+  ::
+  
+    lsof -i:8888
+  
+  *then kill the ssh process with* ``kill PID``. *Redo the job submition step and 
+  port forwarding. Usually this happens at the very beggining of the session, once it is
+  further established it doens't freeze.*  
+  
+  Further Reading
+---------------
+
+We have not attempted to provide a comprehensive tutorial on how to use Pangeo,
+Dask, or Jupyter on HPC systems. This is because each HPC system is uniquely
+configured. Instead we have provided a friendly and generalizable workflows 
+for deploying Pangeo. Below we provide a few useful links for further
+customization of these tools.
+
+ * `Deploying Dask on HPC <http://dask.pydata.org/en/latest/setup/hpc.html>`__
+ * `Configuring and Deploying Jupyter Servers <http://jupyter-notebook.readthedocs.io/en/stable/index.html>`__
+
+.. _conda: https://conda.io/docs/
+.. _Jupyter: https://jupyter.org/
+.. _Dask: https://dask.pydata.org/
+.. _Pegasus: http://ccs.miami.edu/pegasus
+.. _dask-jobqueue: http://dask-jobqueue.readthedocs.io
