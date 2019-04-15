@@ -229,7 +229,7 @@ but logs and workers load are available.
   
   *Sometimes at Pegasus, the jupyter server and ssh port forwarding from the computing node
   may freeze and the user has to first kill the interacitve job, check its id number with* 
-  ``bjobs`` *and find the local machine PID linked with that port using*
+  ``bjobs`` *, and find the local machine PID linked with that port using*
   
   ::
   
