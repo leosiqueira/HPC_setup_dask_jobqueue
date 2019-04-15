@@ -214,7 +214,7 @@ Now, connect to the server using an ssh tunnel from your local machine
 
 ::
 
-    $ ssh -N -L localhost:8888:n003:8888 username@pegasus.ccs.miami.edu
+    $ ssh -N -L localhost:8888:n003:8888  username@hpc_domain
 
 You'll want to change the details in the command above but the basic idea is
 that we're passing the port 8888 from the compute node `n003` to our
