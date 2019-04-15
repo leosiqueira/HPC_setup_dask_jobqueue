@@ -235,7 +235,7 @@ but logs and workers load are available.
   
     lsof -i:8888
   
-  *then kill the ssh process with* ``kill PID``. *Redo the job submition step and 
+  *then kill the ssh process with* ``kill PID``. *Redo the job submission step and 
   port forwarding. Usually this happens at the very beggining of the session, once it is
   further established it doens't freeze.*  
   
