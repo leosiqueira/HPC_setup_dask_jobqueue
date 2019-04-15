@@ -106,7 +106,7 @@ somewhere in your home directory:
 ::
 
     (pangeo) $ which python
-    /home/username/miniconda3/envs/pangeo/bin/python
+    /home/$USER/miniconda3/envs/pangeo/bin/python
     
 Configure Jupyter
 -----------------
@@ -186,7 +186,7 @@ in the Python environment you use for launching the notebook, and activate it,
     jupyter serverextension enable --py nbserverproxy
     ...
     Enabling: nbserverproxy
-    - Writing config: /nethome/$user/.jupyter
+    - Writing config: /nethome/$USER/.jupyter
     - Validating...
       nbserverproxy  OK
 
