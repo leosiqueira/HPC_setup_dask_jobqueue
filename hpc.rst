@@ -199,11 +199,12 @@ http://localhost:8888/proxy/8787/status
 
 with the example below.
 
-In our case, the Pegasus super computer uses the LSF job scheduler, so typing:
+In our case, the Pegasus super computer uses the LSF job scheduler, so within your pangeo
+environment typing :
 
 ::
 
-  bsub -J jupyter -Is -q interactive jupyter notebook --no-browser --ip=0.0.0.0 --port=8888
+  (pangeo) bsub -J jupyter -Is -q interactive jupyter notebook --no-browser --ip=0.0.0.0 --port=8888
   ...
   Job is submitted to <project> project.
   Job <20199271> is submitted to queue <interactive>.
@@ -216,7 +217,7 @@ In our case, the Pegasus super computer uses the LSF job scheduler, so typing:
   [I 18:14:28.342 NotebookApp] http://(n003 or 127.0.0.1):8888/
   [I 18:14:28.342 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
   
-This will get us an interactive job on the `interactive` queue for 6 hours running jupyter server.  
+will get us an interactive job on the `interactive` queue for 6 hours running jupyter server.  
 
 Now, connect to the server using an ssh tunnel from your local machine
 (this could be your laptop or desktop).
