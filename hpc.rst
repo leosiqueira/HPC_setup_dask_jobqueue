@@ -18,6 +18,13 @@ This document assumes that you already have an access to an HPC like Pegasus,
 and are comfortable using the command line. It may be necessary to work with your
 system administrators to properly configure these tools for your machine.
 
+
+.. image:: /figures/bringiton.jpg
+    :width: 200px
+    :align: center
+    :height: 100px
+       
+   
 You should log into your HPC system now.
 
 Installing a software environment
