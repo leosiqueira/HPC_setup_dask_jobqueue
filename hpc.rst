@@ -27,7 +27,16 @@ You should log into your HPC system now.
 Installing a software environment
 ---------------------------------
 
-After you have logged into your HPC system, create some directories,
+After you have logged into your HPC system, make sure you are not using their default
+python module by adding the following line to your ``~/.bashrc``,
+
+::
+
+    module unload python
+
+and start another terminal, or type ``source ~/.bashrc`` to make this change effective. 
+
+Create some directories,
 
 ::
 
