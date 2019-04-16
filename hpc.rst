@@ -261,7 +261,7 @@ but logs and workers load are available.
   
   *Kill the ssh process with* ``kill PID``. *Redo the job submission step and 
   port forwarding. Usually this happens at the very beggining of the session, once it is
-  further established it doens't freeze.* 
+  further established it rarely freezes.* 
   
   Further Reading
 ---------------
