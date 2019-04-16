@@ -15,16 +15,13 @@ Performance Computing (HPC) systems. In particular it covers the following:
 Although the examples on this page were developed using UM's `Pegasus`_ super
 computer, the concepts here should be generally applicable to typical HPC systems. Furthermore, the steps above essentially work for performing other parallel computing at Pegasus that do not use Pangeo but use distributed computing with Dask.
 This document assumes that you already have an access to an HPC like Pegasus,
-and are comfortable using the command line. It may be necessary to work with your
-system administrators to properly configure these tools for your machine.
-
+and are comfortable using the command line. 
 
 .. image:: /figures/bringiton.jpg
-    :width: 200px
+    :width: 100px
     :align: center
-    :height: 100px
-       
-   
+    :height: 50px
+
 You should log into your HPC system now.
 
 Installing a software environment
