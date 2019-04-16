@@ -251,16 +251,17 @@ but logs and workers load are available.
 .. note::
   
   *Sometimes at Pegasus, the jupyter server and ssh port forwarding from the computing node
-  may freeze and the user has to first kill the interacitve job, check its id number with* 
-  ``bjobs`` *, and find the local machine PID linked with that port using*
+  may freeze and the user has to first kill the interacitve job, open another terminal and 
+  check its id number with* ``bjobs`` *and use* ``bkill`` *. Then find the local machine
+  PID linked with that port using*
   
   ::
   
     lsof -i:8888
   
-  *then kill the ssh process with* ``kill PID``. *Redo the job submission step and 
+  *Kill the ssh process with* ``kill PID``. *Redo the job submission step and 
   port forwarding. Usually this happens at the very beggining of the session, once it is
-  further established it doens't freeze.*  
+  further established it doens't freeze.* 
   
   Further Reading
 ---------------
