@@ -182,7 +182,15 @@ In this ``.config/dask/distributed.yaml`` file, set:
 .. note::
   
   *This is an important step for setting the diagnostics dashboard via
-  web interface at UM-Pegasus when running an interactive job.*  
+  web interface at UM-Pegasus when running an interactive job. In order 
+  to the Dashboard to have its full functionality at Pegasus nodes we need 
+  to downgrade the Tornado package for now (due to an issue in V6.0),*
+
+::
+
+    conda install tornado==5.1.1  
+    
+    
 ------------
 
 Basic and friendly deployment: Jupyter + dask-jobqueue
@@ -259,8 +267,6 @@ local system. Now open http://localhost:8888 on your local machine, you should
 find a jupyter server running!
 
 To access the Diagnostics Dashboard you open http://localhost:8888/proxy/8787/status.
-The Dashboard has limited functionality at Pegasus nodes for now (help is welcome),
-but logs and workers load are available.
 
 .. note::
   
