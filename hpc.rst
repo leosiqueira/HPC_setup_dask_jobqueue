@@ -133,6 +133,20 @@ When using recent Jupyter iteration (v5.0 or newer) you can setup your password 
 
 It  will prompt you for a password, and store the hashed password in your
 ``jupyter_notebook_config.json``.
+
+You will need to set these two lines in ~/.jupyter/jupyter_notebook_config.py.
+
+First to allow remote origins:
+
+::
+
+    c.NotebookApp.allow_origin = '*'
+
+and second to listen on all IPs:
+
+::
+
+    c.NotebookApp.ip = '0.0.0.0'
    
 For security reasons, we recommend making sure your ``jupyter_notebook_config.py``
 is readable only by you. For more information on and other methods for
