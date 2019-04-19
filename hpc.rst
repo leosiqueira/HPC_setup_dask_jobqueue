@@ -320,7 +320,14 @@ submit jobs to Pegasus queues that offer larger resources, e.g., ``bigmem``:
     cluster
 
 you can click on ``Manual Scaling`` and choose e.g., 8 workers. The notebook will
-update the client's info once the resources become available. You may also choose to scale
+update the client's info once the resources become available. 
+
+.. image:: /figures/lsf.png
+    :width: 100px
+    :align: center
+    :height: 50px
+
+You may also choose to scale
 the cluster beforehand by replacing the ``cluster`` call above with
 
 .. code:: python
