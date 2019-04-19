@@ -288,7 +288,7 @@ From within your interactive job you can start a cluster with your Jupyter Noteb
 
 .. code:: python
 
-    from dask.distributed import Client,  LocalCluster
+    from dask.distributed import Client, LocalCluster
     cluster = LocalCluster(n_workers=3, memory_limit='20GB', processes=True, threads_per_worker=4)
     client = Client(cluster)
     client
