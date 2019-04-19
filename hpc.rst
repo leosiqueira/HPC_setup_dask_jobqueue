@@ -266,7 +266,6 @@ that we're passing the port 8888 from the compute node `n003` to our
 local system. Now open http://localhost:8888 on your local machine, you should
 find a jupyter server running!
 
-To access the Diagnostics Dashboard you open http://localhost:8888/proxy/8787/status.
 
 .. note::
   
@@ -282,7 +281,68 @@ To access the Diagnostics Dashboard you open http://localhost:8888/proxy/8787/st
   *Kill the ssh process with* ``kill PID``. *Redo the job submission step and 
   port forwarding. Usually this happens at the very beggining of the session, once it is
   further established it rarely freezes.* 
-  
+
+Launch Dask with dask-jobqueue
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+From within your interactive job you can start a cluster with your Jupyter Notebook:
+
+.. code:: python
+
+    from dask.distributed import Client,  LocalCluster
+    cluster = LocalCluster(n_workers=3, memory_limit='20GB', processes=True, threads_per_worker=4)
+    client = Client(cluster)
+    client
+
+and it will output,
+
+.. code:: python
+
+    Client
+    Scheduler: tcp://127.0.0.1:42793
+    Dashboard: http://127.0.0.1:8787/status
+    Cluster
+    Workers: 3
+    Cores: 12
+    Memory: 60.00 GB
+
+To access the Diagnostics Dashboard you open http://localhost:8888/proxy/8787/status.
+
+Most HPC systems use a job-scheduling system to manage job submissions and
+executions among many users. The `dask-jobqueue`_ package is designed to help
+dask interface with these job queuing systems. Usage is quite simple and you can
+submit jobs to Pegasus queues that offer larger resources, e.g., ``bigmem``:
+
+.. code:: python
+
+    from dask.distributed import Client
+    from dask_jobqueue import LSFCluster
+    cluster = LSFCluster(cores=8, memory='20GB', queue='bigmem', walltime='00:30', interface='ib0')
+    cluster
+
+you can click on ``Manual Scaling`` and choose e.g., 6 workers. The notebook will
+update the client's info once the resources become available. You may also choose to scale
+the cluster beforehand by replacing the ``cluster`` call above with
+
+.. code:: python
+
+    cluster.scale(6)
+    client = Client(cluster)
+
+The ``scale()`` method submits a batch of jobs to the job queue system
+(in this case LSF). Depending on how busy the job queue is, it can take a few
+minutes for workers to join your cluster. You can usually check the status of
+your queued jobs using a command line utility like ``bjobs``, you should see you
+have 6 jobs submitted, with 8 cores and 20 GB of memory each. You can also check
+the status of your cluster from inside your Jupyter session:
+
+.. code:: python
+
+    print(client)
+
+For more examples of how to use
+`dask-jobqueue`_, refer to the
+`package documentation <http://dask-jobqueue.readthedocs.io>`__.
+
   Further Reading
 ---------------
 
