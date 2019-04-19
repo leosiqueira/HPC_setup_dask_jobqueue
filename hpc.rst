@@ -295,15 +295,10 @@ From within your interactive job you can start a cluster with your Jupyter Noteb
 
 and it will output,
 
-.. code:: python
-
-    Client
-    Scheduler: tcp://127.0.0.1:42793
-    Dashboard: http://127.0.0.1:8787/status
-    Cluster
-    Workers: 3
-    Cores: 12
-    Memory: 60.00 GB
+.. image:: /figures/cluster.jpg
+    :width: 100px
+    :align: center
+    :height: 50px
 
 To access the Diagnostics Dashboard you open http://localhost:8888/proxy/8787/status.
 
