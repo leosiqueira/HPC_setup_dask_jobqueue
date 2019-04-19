@@ -316,24 +316,25 @@ submit jobs to Pegasus queues that offer larger resources, e.g., ``bigmem``:
 
     from dask.distributed import Client
     from dask_jobqueue import LSFCluster
-    cluster = LSFCluster(cores=8, memory='20GB', queue='bigmem', walltime='00:30', interface='ib0')
+    cluster = LSFCluster(cores=4, memory='20GB', queue='bigmem', walltime='00:30', interface='ib0')
     cluster
 
-you can click on ``Manual Scaling`` and choose e.g., 6 workers. The notebook will
+you can click on ``Manual Scaling`` and choose e.g., 8 workers. The notebook will
 update the client's info once the resources become available. You may also choose to scale
 the cluster beforehand by replacing the ``cluster`` call above with
 
 .. code:: python
 
-    cluster.scale(6)
+    cluster.scale(8)
     client = Client(cluster)
 
 The ``scale()`` method submits a batch of jobs to the job queue system
 (in this case LSF). Depending on how busy the job queue is, it can take a few
 minutes for workers to join your cluster. You can usually check the status of
 your queued jobs using a command line utility like ``bjobs``, you should see you
-have 6 jobs submitted, with 8 cores and 20 GB of memory each. You can also check
-the status of your cluster from inside your Jupyter session:
+have 8 jobs submitted, with 4 cores and 20 GB of memory each (total of 32 cores
+and 160GB memory). You can also check the status of your cluster from inside
+your Jupyter session:
 
 .. code:: python
 
