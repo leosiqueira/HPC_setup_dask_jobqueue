@@ -48,8 +48,7 @@ download and install Miniconda,
 
     cd ~/src
     wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    chmod +x Miniconda3-latest-Linux-x86_64.sh
-    ./Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-MacOSX-x86_64.sh -b -p ~/local/bin
 
 This comprises a self-contained Python environment that we can manipulate
 safely without requiring the involvement of IT. It also allows you to
