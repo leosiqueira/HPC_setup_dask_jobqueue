@@ -48,12 +48,22 @@ download and install Miniconda,
 
     cd ~/src
     wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/local/bin
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/local/bin/miniconda3
 
-This comprises a self-contained Python environment that we can manipulate
+This comprises a self-contained Python environment, with *install prefix*
+(location) ``~/local/bin/miniconda3``, that we can manipulate
 safely without requiring the involvement of IT. It also allows you to
 create isolated software environments so that we can experiment in the
-future safely. Before creating your environment, we recommend you update
+future safely. 
+
+.. note:: 
+
+    *You may choose to install miniconda in any other directory, e.g. 
+    if your home space quota is small, by changing the install prefix.
+    You may also run* ``bash Miniconda3-latest-Linux-x86_64.sh`` *to go
+    trough the whole installation process if desired.*
+
+Before creating your environment, we recommend you update
 your conda package manager with
 
 ::
