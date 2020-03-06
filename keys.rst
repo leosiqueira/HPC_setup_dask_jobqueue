@@ -115,9 +115,10 @@ The above allows you to type:
 
 And no password is required. If you have and SSH Server that’s only accessible to you via an SSH session on an intermediate machine, which is the prevailing situation with remote private networks, you can automate that in ``~/.ssh/config`` too. 
 Say you can’t reach ``server2.34.56.78.90`` directly, but you can reach some other SSH server on the same private subnet that is publically accessible, say ``server1.23.45.67.89``.
-Then, you can add the following lines to *proxyjump* to ``server2`` using ``server1`` server:
+Then, you can add the following lines to *proxyjump* to ``server2`` using ``server1`` (altough you'll need to provide the password for the second server):
 
 ::
+
   Host jumpserver2
   User $SERVER2_USERNAME
   Hostname server2.34.56.78.90
