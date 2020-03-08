@@ -101,7 +101,7 @@ Before creating your environment, we recommend updating your conda package manag
 Further Reading
 ---------------
 
-We have not attempted to provide a comprehensive tutorial on how to use Dask or Jupyter on HPC systems because each HPC system is uniquely configured. Instead, we have provided a friendly and generalizable workflow for deploying Pangeo. Below we provide a few useful links for further customization of these tools.
+We have not attempted to provide a comprehensive tutorial on how to use Dask or Jupyter on HPC systems because each HPC system is uniquely configured. Instead, we have provided a friendly and generalizable workflow for deploying parallel multicore processing using python. Below we provide a few useful links for further customization of these tools.
 
  * `Deploying Dask on HPC <http://dask.pydata.org/en/latest/setup/hpc.html>`__
  * `Configuring and Deploying Jupyter Servers <http://jupyter-notebook.readthedocs.io/en/stable/index.html>`__
