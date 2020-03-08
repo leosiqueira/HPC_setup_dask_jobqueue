@@ -1,6 +1,6 @@
 .. _hpc:
 
-Getting Started with Dask and Pangeo on HPC
+Getting Started with Dask on HPC
 ==================================
 
 This tutorial covers how to set up an environment to run operations in parallel using multicore processing on High-Performance Computing (HPC) systems. In particular, it covers the following:
