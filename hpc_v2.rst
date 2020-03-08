@@ -67,7 +67,36 @@ It also allows you to create isolated software environments so that we can exper
     if your home space quota is small, by changing the install prefix.
     You may also run* ``bash Miniconda3-latest-*.sh`` *to go
     trough the whole installation process if desired.*
- 
+
+Make the conda command available in all bash shells with,
+
+::
+
+	~/local/miniconda3/condabin/conda init
+	
+	
+Note that this command modifies your user's ``~/.bashrc`` file. In addition to,
+the ``conda`` command being made available, the ``base`` conda environment is automatically
+activated (i.e., environment variables set and all executables put on ``$PATH``). 
+Before creating your environment, we recommend updating your conda package manager with
+
+::
+    
+    conda update conda
+
+.. note:: 
+
+    *Depending if you chose to initialize Miniconda in your* ``~/.bashrc``
+    *at the end of the installation process (or like in the above), a* ``conda update`` *activates a* ``base``
+    *environment by default. If you wish to prevent conda from activating the* ``base``
+    *environment at shell initialization (recommended):*
+    
+    ::
+    
+            conda config --set auto_activate_base false
+    
+    *This will create a* ``./condarc`` *in your home directory with this setting the first time you run it.*
+       
 Further Reading
 ---------------
 
