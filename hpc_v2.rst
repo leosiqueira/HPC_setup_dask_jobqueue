@@ -54,7 +54,7 @@ The Miniconda distribution packages together just ``python``, ``conda``, and a s
 
         	module unload python
 
-    	*and start another terminal, or type* ``source ~/.bashrc`` *to make this change effective.* 
+    	*and start another terminal, or type* ``source ~/.bashrc`` *to make this change effective for the current shell.* 
  
 This installation comprises a self-contained Python environment, with *install prefix*
 (location) ``~/local/miniconda3``, that we can manipulate safely without requiring the involvement of support services.
@@ -77,6 +77,9 @@ Make the conda command available in all bash shells with,
 Note that this command modifies your user's ``~/.bashrc`` file. In addition to,
 the ``conda`` command being made available, the ``base`` conda environment is automatically
 activated (i.e., environment variables set and all executables put on ``$PATH``). 
+
+IMPORTANT: After running ``conda init``, your shells need to be closed and restarted, or type ``source ~/.bashrc``, to make  changes effective for the current shell.
+
 Before creating your environment, we recommend updating your conda package manager with
 
 ::
