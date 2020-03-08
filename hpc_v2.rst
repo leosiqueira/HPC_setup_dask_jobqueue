@@ -91,7 +91,7 @@ Before creating your environment, we recommend updating your conda package manag
     *Depending if you chose to initialize Miniconda in your* ``~/.bashrc``
     *at the end of the installation process (or like in the above), a* ``conda update`` *activates a* ``base``
     *environment by default. If you wish to prevent conda from activating the* ``base``
-    *environment at shell initialization (recommended):*
+    *environment at shell initialization (recommended), use*
     
     ::
     
