@@ -3,8 +3,7 @@
 Getting Started with Dask and Pangeo on HPC
 ==================================
 
-This tutorial covers how to set up an environment to run operations in parallel using multicore processing on High
-Performance Computing (HPC) systems. In particular, it covers the following:
+This tutorial covers how to set up an environment to run operations in parallel using multicore processing on High-Performance Computing (HPC) systems. In particular, it covers the following:
 
 1. Install `conda`_ and create an environment.
 2. Configure `Jupyter`_.
@@ -30,7 +29,7 @@ Start with creating some directories,
 
     mkdir -p ~/src ~/local
   
-The Miniconda distribution packages together just ``python``, ``conda``, and a small number of other packages. Its download size is around 50MB or less than a tenth the size of Anaconda distribution (100+ packages). Morevover, the conda tool is very valuable and what we will use to set up a robust environment. Download and install Miniconda for Triton (see notes for Pegasus version),
+The Miniconda distribution packages together just ``python``, ``conda``, and a small number of other packages. Its download size is around 50MB or less than a tenth of the size of Anaconda distribution (100+ packages). Moreover, the conda tool is very valuable and what we will use to set up a robust environment. Download and install Miniconda for Triton (see notes for Pegasus version),
 
 ::
 
@@ -65,7 +64,7 @@ It also allows you to create isolated software environments so that we can exper
     *You may choose to install miniconda in any other directory, e.g., 
     if your home space quota is small, by changing the install prefix.
     You may also run* ``bash Miniconda3-latest-*.sh`` *to go
-    trough the whole installation process if desired.*
+    through the whole installation process if desired.*
 
 Make the conda command available in all bash shells with,
 
@@ -74,7 +73,7 @@ Make the conda command available in all bash shells with,
 	~/local/miniconda3/condabin/conda init
 	
 	
-Note that this command modifies your user's ``~/.bashrc`` file. In addition to,
+Note that this command modifies your user's ``~/.bashrc`` file. In addition,
 the ``conda`` command being made available, the ``base`` conda environment is automatically
 activated (i.e., environment variables set and all executables put on ``$PATH``). 
 
@@ -88,7 +87,7 @@ Before creating your environment, we recommend updating your conda package manag
 
 .. note:: 
 
-    *Depending if you chose to initialize Miniconda in your* ``~/.bashrc``
+    *Depending on if you chose to initialize Miniconda in your* ``~/.bashrc``
     *at the end of the installation process (or like in the above), a* ``conda update`` *activates a* ``base``
     *environment by default. If you wish to prevent conda from activating the* ``base``
     *environment at shell initialization (recommended), use*
@@ -97,16 +96,12 @@ Before creating your environment, we recommend updating your conda package manag
     
             conda config --set auto_activate_base false
     
-    *This will create a* ``./condarc`` *in your home directory with this setting the first time you run it.*
+    *The above creates a* ``./condarc`` *in your home directory with this setting the first time you run it.*
        
 Further Reading
 ---------------
 
-We have not attempted to provide a comprehensive tutorial on how to use Pangeo,
-Dask, or Jupyter on HPC systems. This is because each HPC system is uniquely
-configured. Instead we have provided a friendly and generalizable workflows 
-for deploying Pangeo. Below we provide a few useful links for further
-customization of these tools.
+We have not attempted to provide a comprehensive tutorial on how to use Pangeo, Dask, or Jupyter on HPC systems because each HPC system is uniquely configured. Instead, we have provided a friendly and generalizable workflow for deploying Pangeo. Below we provide a few useful links for further customization of these tools.
 
  * `Deploying Dask on HPC <http://dask.pydata.org/en/latest/setup/hpc.html>`__
  * `Configuring and Deploying Jupyter Servers <http://jupyter-notebook.readthedocs.io/en/stable/index.html>`__
