@@ -6,11 +6,11 @@ Getting Started with Dask and Pangeo on HPC
 This tutorial covers how to set up an environment to run operations in parallel using multicore processing on High
 Performance Computing (HPC) systems. In particular, it covers the following:
 
-1. Install `conda` and creating an environment
-2. Configure `Jupyter`
-3. Launch a `JupyterLab` server for your job
-4. Launch `Dask` with a job scheduler
-5. Connect to `Jupyter` and the `Dask`-Dashboard from your personal computer
+1. Install `conda`_ and create an environment.
+2. Configure `Jupyter`_.
+3. Launch `Dask`_ with a job scheduler.
+4. Launch a `Jupyter`_ server for your job.
+5. Connect to `JupyterLab`_ and the `Dask-Dashboard`_ from your personal computer.
 
 Although the examples on this page are target at using UMiami's `Triton <https://idsc.miami.edu/triton/>`__ supercomputer (or `Pegasus <https://idsc.miami.edu/pegasus/>`__), the concepts here should generally apply to typical HPC systems. Furthermore, the steps above primarily work for performing other parallel computing at Triton (Pegasus) that do not use the Pangeo-like python ecosystem but use distributed computing with Dask. This document assumes that you already have access to an HPC system like Triton (Pegasus), and are comfortable using the command line. 
 
@@ -68,3 +68,21 @@ It also allows you to create isolated software environments so that we can exper
     You may also run* ``bash Miniconda3-latest-*.sh`` *to go
     trough the whole installation process if desired.*
  
+Further Reading
+---------------
+
+We have not attempted to provide a comprehensive tutorial on how to use Pangeo,
+Dask, or Jupyter on HPC systems. This is because each HPC system is uniquely
+configured. Instead we have provided a friendly and generalizable workflows 
+for deploying Pangeo. Below we provide a few useful links for further
+customization of these tools.
+
+ * `Deploying Dask on HPC <http://dask.pydata.org/en/latest/setup/hpc.html>`__
+ * `Configuring and Deploying Jupyter Servers <http://jupyter-notebook.readthedocs.io/en/stable/index.html>`__
+
+.. _conda: https://conda.io/docs/
+.. _Jupyter: https://jupyter.org/
+.. _JupyterLab: https://jupyterlab.readthedocs.io/en/stable/
+.. _Dask: https://dask.pydata.org/
+.. _Dask-Dashboard: https://docs.dask.org/en/latest/diagnostics-distributed.html
+.. _dask-jobqueue: http://dask-jobqueue.readthedocs.io
