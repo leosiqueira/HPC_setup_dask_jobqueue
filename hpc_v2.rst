@@ -44,18 +44,17 @@ The Miniconda distribution packages together just ``python``, ``conda``, and a s
 	*For Pegasus, use the following version:*
     
 	::
-        
-	    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-            bash Miniconda3-latest-Linux-x86_64.sh -bfp ~/local/miniconda3
-            
-        
-    *Moreover, for Pegasus, make sure you are not using the default python module by adding the following line to your*           ``~/.bashrc``,
+
+		wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+		bash Miniconda3-latest-Linux-x86_64.sh -bfp ~/local/miniconda3
+               
+	*Moreover, for Pegasus, make sure you are not using the default python module by adding the following line to your*           ``~/.bashrc``,
     
-    ::
+    	::
 
-        module unload python
+        	module unload python
 
-    *and start another terminal, or type* ``source ~/.bashrc`` *to make this change effective.* 
+    	*and start another terminal, or type* ``source ~/.bashrc`` *to make this change effective.* 
  
 This installation comprises a self-contained Python environment, with *install prefix*
 (location) ``~/local/miniconda3``, that we can manipulate safely without requiring the involvement of support services.
