@@ -35,8 +35,8 @@ The Miniconda distribution packages together just ``python``, ``conda``, and a s
 ::
 
     cd ~/src
-	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-ppc64le.sh
-	bash Miniconda3-latest-Linux-ppc64le.sh -bfp ~/local/miniconda3
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-ppc64le.sh
+    bash Miniconda3-latest-Linux-ppc64le.sh -bfp ~/local/miniconda3
 
 
 .. note:: 
@@ -46,7 +46,7 @@ The Miniconda distribution packages together just ``python``, ``conda``, and a s
 	::
         
 	    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-        bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/local/bin/miniconda3
+            bash Miniconda3-latest-Linux-x86_64.sh -bfp ~/local/miniconda3
             
         
     *Moreover, for Pegasus, make sure you are not using the default python module by adding the following line to your*           ``~/.bashrc``,
@@ -61,7 +61,7 @@ This installation comprises a self-contained Python environment, with *install p
 (location) ``~/local/miniconda3``, that we can manipulate safely without requiring the involvement of support services.
 It also allows you to create isolated software environments so that we can experiment in the future safely. 
 
-.. note:: 
+.. note::
 
     *You may choose to install miniconda in any other directory, e.g., 
     if your home space quota is small, by changing the install prefix.
