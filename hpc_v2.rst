@@ -288,13 +288,39 @@ find a JupyterLab server running!
 
 .. note::
   
-  *Sometimes, the Jupyter server and ssh port forwarding from the computing node may freeze and the user has to first kill    	the interacitve job, open another terminal and check its id number with* ``bjobs`` *and use* ``bkill`` *. Then find the     local machine PID linked with that port using*
+  *Sometimes, the Jupyter server and ssh port forwarding from the computing node may freeze and the user has first to kill    	the interacitve job, open another terminal and check its id number with* ``bjobs`` *and use* ``bkill`` *. Then find the     local machine PID linked with that port using*
   
   ::
   
     lsof -i:8890
   
-  *Kill the ssh process with* ``kill PID``. *Redo the job submission step and port forwarding. Usually this happens at the    	very beggining of the session, once it is further established it rarely freezes.* 
+  *Kill the ssh process with* ``kill PID``. *Redo the job submission step and port forwarding. Usually, this happens at the very beginning of the session, once it is further established it rarely freezes.*
+  
+Launch Dask with dask-jobqueue
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+From within your JupyterLab you can start a cluster by creating a Python3 Jupyter Notebook and run in the first cell
+
+.. code:: python
+
+    from dask.distributed import Client, LocalCluster
+    cluster = LocalCluster(n_workers=3, memory_limit='300MB', processes=True, threads_per_worker=4)
+    client = Client(cluster)
+    client
+
+and it will output,
+
+.. image:: /figures/cluster.jpg
+    :width: 100px
+    :align: center
+    :height: 50px
+
+To access the Diagnostics Dashboard you may open a separate tab an go to ``http://localhost:8890/proxy/8787/status`` or have the diagnostics embeded in the JupyterLab panes. For the latter, you click on the ``dasklab-extension`` symbol on the left-hand sidebar and paste ``http://localhost:8890/proxy/8787`` in the ``DASK BASHBOARD URL`` field. The grey buttons become available (orange) and they open new panes within JupyterLab like below, 
+
+.. image:: /figures/embed_dashboard.jpg
+    :width: 100px
+    :align: center
+    :height: 50px
+
 
 Further Reading
 ---------------
