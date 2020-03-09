@@ -108,7 +108,7 @@ Create a new conda environment for our pangeo work:
 
 .. note::
 
-	*Depending on your application, you may choose to remove or add conda packages to this list. For earth sciences 	studies, Xarray is a useful choice and includes Dask and Pandas packages as dependencies, and is usually combined 	  with Scipy, Cartopy, among others.*
+	*IMPORTANT: For setting the diagnostics dashboard via web interface at UMiami-Triton (Pegasus) in an 			interactive (or regular) scheduled job, we need to downgrade the Tornado package for now due to an issue in V6.0. 	  Moreover, depending on your application, you may choose to remove or add conda packages to this list. For earth 	  sciences studies, Xarray is a useful choice, includind Dask and Pandas packages as dependencies, and is usually 	  combined with Scipy, Cartopy, among others.*
 
 To see a list of all of your environments, run:
 
