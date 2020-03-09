@@ -271,7 +271,30 @@ environment typing
 	[LabApp] http://t037:8888/
 	[LabApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
 	
-which gives us an interactive job on the ``interactive`` queue for 6 hours running JupyterLab server in node ``t037``.	
+which gives us an interactive job on the ``interactive`` queue for 6 hours running JupyterLab server in node ``t037``.
+
+Now, connect to the server using a ssh tunnel from your local machine
+(this could be your laptop or desktop).
+
+::
+
+    $ ssh -N -L localhost:8890:t037:8888  username@hpc_domain
+
+You may need to change the details in the command above, but the basic idea is
+that we're passing the port 8888 from the compute node ``t037`` to your
+local system port 8890. Now open http://localhost:8890 on your local machine browser, you should
+find a JupyterLAb server running!
+
+
+.. note::
+  
+  *Sometimes, the Jupyter server and ssh port forwarding from the computing node may freeze and the user has to first kill    	the interacitve job, open another terminal and check its id number with* ``bjobs`` *and use* ``bkill`` *. Then find the     local machine PID linked with that port using*
+  
+  ::
+  
+    lsof -i:8888
+  
+  *Kill the ssh process with* ``kill PID``. *Redo the job submission step and port forwarding. Usually this happens at the    	very beggining of the session, once it is further established it rarely freezes.* 
 
 Further Reading
 ---------------
