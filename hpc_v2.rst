@@ -102,7 +102,7 @@ Create a new conda environment for our pangeo work:
 
 ::
 
-    conda create -n pangeolab -c conda-forge -y python=3.6 \
+    conda create -n myenv -c conda-forge -y python=3.6 \
     nbserverproxy jupyterlab=2.0.0 nodejs dask_labextension \
     dask-jobqueue ipywidgets tornado==5.1.1
 
@@ -158,7 +158,7 @@ To move out of your environment,
 Configure Jupyter
 -----------------
 
-The lastest Jupyter versions (v5.0 or newer) allows you to setup your password using
+The lastest `Jupyter`_ versions (v5.0 or newer) allows you to setup your password using
 
 ::
    
