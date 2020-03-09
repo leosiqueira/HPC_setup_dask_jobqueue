@@ -97,7 +97,116 @@ Before creating your environment, we recommend updating your conda package manag
             conda config --set auto_activate_base false
     
     *The above creates a* ``./condarc`` *in your home directory with this setting the first time you run it.*
-       
+
+Create a new conda environment for our pangeo work:
+
+::
+
+    conda create -n myenv -c conda-forge -y python=3.6 \
+    jupyterlab nbserverproxy nodejs dask-jobqueue ipywidgets \
+    mpi4py xarray netcdf4 cartopy
+
+.. note::
+
+   *Depending on your application, you may choose to remove or add conda
+   packages to this list (Xarray includes Dask and Pandas packages as dependencies).*
+
+To see a list of all of your environments, run:
+
+::
+
+  conda env list
+
+To remove an environement,
+
+::
+  
+  conda remove --name myenv --all
+
+Activate your environment
+
+::
+
+    conda activate myenv
+
+Your prompt should now look something like this (note the myenv environment name before the prompt):
+
+::
+
+    (myenv) $
+
+And if you ask where your Python command lives, it should direct you to
+somewhere in your home directory:
+
+::
+
+    (myenv) $ which python
+    ~/local/miniconda3/envs/myenv/bin/python
+    
+To move out of your environment,
+
+::
+
+    conda deactivate
+    
+Configure Jupyter
+-----------------
+
+The lastest Jupyter versions (v5.0 or newer) allows you to setup your password using
+
+::
+   
+      jupyter notebook --generate-config
+      jupyter notebook password
+
+It  will prompt you for a password, and store the hashed password in your
+``jupyter_notebook_config.json``.
+
+You will need to set these two lines in ~/.jupyter/jupyter_notebook_config.py.
+
+First to allow remote origins:
+
+::
+
+    c.NotebookApp.allow_origin = '*'
+
+and second to listen on all IPs:
+
+::
+
+    c.NotebookApp.ip = '0.0.0.0'
+   
+For security reasons, we recommend making sure your ``jupyter_notebook_config.py``
+is readable only by you. For more information on and other methods for
+securing Jupyter, check out
+`Securing a notebook server <http://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server>`__
+in the Jupyter documentation.
+
+::
+
+    chmod 400 ~/.jupyter/jupyter_notebook_config.py
+
+Finally, we want to configure dask's dashboard to forward through Jupyter,
+instead of using ssh port forwarding. This can be done by editing the dask
+distributed config file, e.g.: ``.config/dask/distributed.yaml``. By default
+when ``dask.distributed`` and/or ``dask-jobqueue`` is first imported, it places
+a file at ``~/.config/dask/distributed.yaml`` with a commented out version.
+You can create this file and do this first import by simply 
+
+::
+
+    python -c 'from dask.distributed import Client'
+
+In this ``.config/dask/distributed.yaml`` file, set:
+
+.. code:: python
+
+  #   ###################
+  #   # Bokeh dashboard #
+  #   ###################
+  #   dashboard:
+      link: "/proxy/{port}/status"
+
 Further Reading
 ---------------
 
