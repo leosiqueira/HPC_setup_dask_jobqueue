@@ -156,17 +156,17 @@ To move out of your environment,
 Configure Jupyter
 -----------------
 
-The lastest `Jupyter`_ versions (v5.0 or newer) allows you to setup your password using
+The lastest `Jupyter`_ versions (v5.0 or newer) allows you to set up your password using
 
 ::
    
       jupyter notebook --generate-config
       jupyter notebook password
 
-It  will prompt you for a password, and store the hashed password in your
+It  prompts you for a password, and store the hashed password in your
 ``jupyter_notebook_config.json``.
 
-You will need to set these two lines in ~/.jupyter/jupyter_notebook_config.py.
+You also need to uncomment and set these two lines in ``~/.jupyter/jupyter_notebook_config.py``.
 
 First to allow remote origins:
 
@@ -183,16 +183,15 @@ and second to listen on all IPs:
 For security reasons, we recommend making sure your ``jupyter_notebook_config.py``
 is readable only by you. For more information on and other methods for
 securing Jupyter, check out
-`Securing a notebook server <http://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server>`__
-in the Jupyter documentation.
+`Securing a notebook server <http://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server>`__ in the Jupyter documentation.
 
 ::
 
     chmod 400 ~/.jupyter/jupyter_notebook_config.py
 
-Finally, we want to configure dask's dashboard to forward through Jupyter,
+Finally, we want to configure dask's dashboard to forward through JupyterLab,
 instead of using ssh port forwarding. This can be done by editing the dask
-distributed config file, e.g.: ``.config/dask/distributed.yaml``. By default
+distributed config file, e.g., ``.config/dask/distributed.yaml``. By default
 when ``dask.distributed`` and/or ``dask-jobqueue`` is first imported, it places
 a file at ``~/.config/dask/distributed.yaml`` with a commented out version.
 You can create this file and do this first import by simply 
@@ -211,11 +210,14 @@ In this ``.config/dask/distributed.yaml`` file, set:
   #   dashboard:
       link: "/proxy/{port}/status"
 
+We need to install the JupyterLab extension to manage Dask clusters, as well as embed Dask's dashboard plots directly into JupyterLab panes with,
 
 ::
 	
 	jupyter labextension install dask-labextension
 	jupyter serverextension enable --py --sys-prefix dask_labextension
+	
+	
 
 Further Reading
 ---------------
