@@ -98,7 +98,7 @@ Before creating your environment, we recommend updating your conda package manag
     
     *The above creates a* ``./condarc`` *in your home directory with this setting the first time you run it.*
 
-Create a new conda environment for our pangeo work:
+Create a new conda environment for your work:
 
 ::
 
@@ -163,7 +163,7 @@ The lastest `Jupyter`_ versions (v5.0 or newer) allows you to set up your passwo
       jupyter notebook --generate-config
       jupyter notebook password
 
-It  prompts you for a password, and store the hashed password in your
+It  prompts you to create a password for the Jupyter server, and store the hashed password in your
 ``jupyter_notebook_config.json``.
 
 You also need to uncomment and set these two lines in ``~/.jupyter/jupyter_notebook_config.py``.
@@ -181,13 +181,15 @@ and second to listen on all IPs:
     c.NotebookApp.ip = '0.0.0.0'
    
 For security reasons, we recommend making sure your ``jupyter_notebook_config.py``
-is readable only by you. For more information on and other methods for
-securing Jupyter, check out
-`Securing a notebook server <http://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server>`__ in the Jupyter documentation.
+is readable only by you with,
 
 ::
 
     chmod 400 ~/.jupyter/jupyter_notebook_config.py
+
+.. note::
+*For more information on and other methods for securing Jupyter, check out*
+`Securing a notebook server <http://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server>`__ *in the Jupyter documentation.*
 
 Finally, we want to configure dask's dashboard to forward through JupyterLab,
 instead of using ssh port forwarding. This can be done by editing the dask
