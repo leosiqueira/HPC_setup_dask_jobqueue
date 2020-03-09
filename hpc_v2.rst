@@ -219,15 +219,16 @@ We also need to install the JupyterLab extension to manage Dask clusters, as wel
 	(myenv) $ jupyter labextension install dask-labextension
 	Building jupyterlab assets (build:prod:minimize)
 
+
 Then,
 
 ::
+
 	(myenv) $ jupyter serverextension enable --py --sys-prefix dask_labextension
 	Enabling: dask_labextension
 	- Writing config: /home/$USER/local/miniconda3/envs/myenv/etc/jupyter
     	- Validating...
       	dask_labextension 0.3.3 OK
-	
 	
 
 Further Reading
