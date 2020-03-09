@@ -212,7 +212,31 @@ In this ``.config/dask/distributed.yaml`` file, set:
   #   dashboard:
       link: "/proxy/{port}/status"
 
-We also need to install the JupyterLab extension to manage Dask clusters, as well as embed Dask's dashboard plots directly into JupyterLab panes with,
+------------
+
+Basic and friendly deployment: Jupyter + dask-jobqueue
+----------------------------------------
+
+Start a Jupyter Notebook Server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now that we have Jupyter configured, we can start a JupyterLab (or notebook) server. In many
+cases, your system administrators require want you to run this notebook server in
+an interactive session on a compute node. Please kindly refrain from running
+resource-intensive jobs on the UMiami-Triton(Pegasus) login nodes, unless you have direct access to dedicated
+compute nodes like Umiami-Visx. Submit your production
+jobs to LSF, and use the interactive queue – **not the login nodes** – for
+resource-intensive command-line processes. You may compile and test jobs on
+login nodes in any case. However, any jobs exceeding 30 minutes of run time or using excessive
+resources on the login nodes will be terminated, and the UM-IDSC account responsible
+for those jobs may be suspended. This is not a universal rule, but it is
+one we'll follow for this tutorial.
+
+If you are using dask-jobqueue within Jupyter, one user-friendly solution to see the
+Diagnostics Dashboard is to use ``nbserverproxy`` or ``dask-labextension``. As the dashboard HTTP endpoint is 
+launched inside the same node as Jupyter, this is the solution for viewing it at
+UMiami-Triton (Pegasus) when running within an interactive job. You just need to have it installed
+in the Python environment you use for launching JupyterLab (or notebook), and activate it. First, we need to install the JupyterLab extension to manage Dask clusters, as well as embed Dask's dashboard plots directly into JupyterLab panes with,
 
 ::
 	
@@ -220,7 +244,7 @@ We also need to install the JupyterLab extension to manage Dask clusters, as wel
 	Building jupyterlab assets (build:prod:minimize)
 
 
-Then,
+Then enable the extension for JupyterLab with,
 
 ::
 
@@ -229,7 +253,25 @@ Then,
 	- Writing config: /home/$USER/local/miniconda3/envs/myenv/etc/jupyter
     	- Validating...
       	dask_labextension 0.3.3 OK
+
+In our case, the Triton (Pegasus) supercomputer uses the LSF job scheduler, so within your (myenv)
+environment typing
+
+::
+
+	(myenv) $ bsub -J jupyter -Is -q interactive jupyter lab --no-browser --ip=0.0.0.0 --port=8888
+	Job <33565> is submitted to queue <interactive>.
+	<<Waiting for dispatch ...>>
+	<<Starting on t037>>
+	[LabApp] JupyterLab extension loaded from 	
+	~/local/miniconda3/envs/myenv/lib/python3.6/site-packages/jupyterlab
+	[LabApp] JupyterLab application directory is ~/local/miniconda3/envs/myenv/share/jupyter/lab
+	[LabApp] Serving notebooks from local directory: /home/$USER
+	[LabApp] The Jupyter Notebook is running at:
+	[LabApp] http://t037:8888/
+	[LabApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
 	
+which gives us an interactive job on the ``interactive`` queue for 6 hours running JupyterLab server in node ``t037``.	
 
 Further Reading
 ---------------
