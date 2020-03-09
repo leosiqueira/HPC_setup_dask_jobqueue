@@ -160,8 +160,8 @@ The lastest `Jupyter`_ versions (v5.0 or newer) allows you to set up your passwo
 
 ::
    
-      jupyter notebook --generate-config
-      jupyter notebook password
+      (myenv) $ jupyter notebook --generate-config
+      (myenv) $ jupyter notebook password
 
 It  prompts you to create a password for the Jupyter server, and store the hashed password in your
 ``jupyter_notebook_config.json``.
@@ -185,7 +185,7 @@ is readable only by you with,
 
 ::
 
-    chmod 400 ~/.jupyter/jupyter_notebook_config.py
+    (myenv) $ chmod 400 ~/.jupyter/jupyter_notebook_config.py
 
 .. note::
 *For more information on and other methods for securing Jupyter, check out*
@@ -216,8 +216,17 @@ We also need to install the JupyterLab extension to manage Dask clusters, as wel
 
 ::
 	
-	jupyter labextension install dask-labextension
-	jupyter serverextension enable --py --sys-prefix dask_labextension
+	(myenv) $ jupyter labextension install dask-labextension
+	Building jupyterlab assets (build:prod:minimize)
+
+Then,
+
+::
+	(myenv) $ jupyter serverextension enable --py --sys-prefix dask_labextension
+	Enabling: dask_labextension
+	- Writing config: /home/$USER/local/miniconda3/envs/myenv/etc/jupyter
+    	- Validating...
+      	dask_labextension 0.3.3 OK
 	
 	
 
