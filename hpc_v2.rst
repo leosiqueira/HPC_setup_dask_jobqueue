@@ -27,15 +27,15 @@ Start with creating some directories,
 
 ::
 
-    mkdir -p ~/src ~/local
+    $ mkdir -p ~/src ~/local
   
 The Miniconda distribution packages together just ``python``, ``conda``, and a small number of other packages. Its download size is around 50MB or less than a tenth of the size of Anaconda distribution (100+ packages). Moreover, the conda tool is very valuable and what we will use to set up a robust environment. Download and install Miniconda for Triton (see notes for Pegasus version),
 
 ::
 
-    cd ~/src
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-ppc64le.sh
-    bash Miniconda3-latest-Linux-ppc64le.sh -bfp ~/local/miniconda3
+    $ cd ~/src
+    $ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-ppc64le.sh
+    $ bash Miniconda3-latest-Linux-ppc64le.sh -bfp ~/local/miniconda3
 
 
 .. note:: 
@@ -44,8 +44,8 @@ The Miniconda distribution packages together just ``python``, ``conda``, and a s
     
 	::
 
-		wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-		bash Miniconda3-latest-Linux-x86_64.sh -bfp ~/local/miniconda3
+		$ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+		$ bash Miniconda3-latest-Linux-x86_64.sh -bfp ~/local/miniconda3
                
 	*Moreover, for Pegasus, make sure you are not using the default python module by adding the following line to your*           ``~/.bashrc``,
     
@@ -70,7 +70,7 @@ Make the conda command available in all bash shells with,
 
 ::
 
-	~/local/miniconda3/condabin/conda init
+	$ ~/local/miniconda3/condabin/conda init
 	
 	
 Note that this command modifies your user's ``~/.bashrc`` file. In addition,
@@ -83,7 +83,7 @@ Before creating your environment, we recommend updating your conda package manag
 
 ::
     
-    conda update conda
+    $ conda update conda
 
 .. note:: 
 
@@ -94,7 +94,7 @@ Before creating your environment, we recommend updating your conda package manag
     
     ::
     
-            conda config --set auto_activate_base false
+           $ conda config --set auto_activate_base false
     
     *The above creates a* ``./condarc`` *in your home directory with this setting the first time you run it.*
 
@@ -102,9 +102,9 @@ Create a new conda environment for our pangeo work:
 
 ::
 
-    conda create -n myenv -c conda-forge -y python=3.6 \
-    nbserverproxy jupyterlab=2.0.0 nodejs dask_labextension \
-    dask-jobqueue ipywidgets tornado==5.1.1
+    $ conda create -n myenv -c conda-forge -y python=3.6 \
+      nbserverproxy jupyterlab=2.0.0 nodejs dask_labextension \
+      dask-jobqueue ipywidgets tornado==5.1.1
 
 .. note::
 
@@ -114,19 +114,19 @@ To see a list of all of your environments, run:
 
 ::
 
-  conda env list
+  $ conda env list
 
 To remove an environment,
 
 ::
   
-  conda remove --name myenv --all
+  $ conda remove --name myenv --all
 
 Let's activate your environment with,
 
 ::
 
-    conda activate myenv
+   $ conda activate myenv
 
 Your prompt should now look something like this (note the myenv environment name before the prompt):
 
@@ -147,7 +147,7 @@ To move out of your environment,
 
 ::
 
-    conda deactivate
+    (myenv) $ conda deactivate
     
 .. note::
 
@@ -194,11 +194,11 @@ instead of using ssh port forwarding. This can be done by editing the dask
 distributed config file, e.g., ``.config/dask/distributed.yaml``. By default
 when ``dask.distributed`` and/or ``dask-jobqueue`` is first imported, it places
 a file at ``~/.config/dask/distributed.yaml`` with a commented out version.
-You can create this file and do this first import by simply 
+You can create this file and do this first import by simply running,
 
 ::
 
-    python -c 'from dask.distributed import Client'
+    (myenv) $ python -c 'from dask.distributed import Client'
 
 In this ``.config/dask/distributed.yaml`` file, set:
 
@@ -210,7 +210,7 @@ In this ``.config/dask/distributed.yaml`` file, set:
   #   dashboard:
       link: "/proxy/{port}/status"
 
-We need to install the JupyterLab extension to manage Dask clusters, as well as embed Dask's dashboard plots directly into JupyterLab panes with,
+We also need to install the JupyterLab extension to manage Dask clusters, as well as embed Dask's dashboard plots directly into JupyterLab panes with,
 
 ::
 	
