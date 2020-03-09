@@ -108,8 +108,7 @@ Create a new conda environment for our pangeo work:
 
 .. note::
 
-   *Depending on your application, you may choose to remove or add conda
-   packages to this list (Xarray includes Dask and Pandas packages as dependencies).*
+	*Depending on your application, you may choose to remove or add conda packages to this list. For earth sciences 	studies, Xarray is a useful choice and includes Dask and Pandas packages as dependencies, and is usually combined 	  with Scipy, Cartopy, among others.*
 
 To see a list of all of your environments, run:
 
@@ -117,13 +116,13 @@ To see a list of all of your environments, run:
 
   conda env list
 
-To remove an environement,
+To remove an environment,
 
 ::
   
   conda remove --name myenv --all
 
-Activate your environment
+Let's activate your environment with,
 
 ::
 
@@ -144,17 +143,16 @@ somewhere in your home directory:
     ~/local/miniconda3/envs/myenv/bin/python
     
 
-::
-	
-	jupyter labextension install dask-labextension
-	jupyter serverextension enable --py --sys-prefix dask_labextension
-
 To move out of your environment,
 
 ::
 
     conda deactivate
     
+.. note::
+
+	*see* `Managing Environments <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html>`__ *for more information.*
+	
 Configure Jupyter
 -----------------
 
@@ -212,6 +210,12 @@ In this ``.config/dask/distributed.yaml`` file, set:
   #   ###################
   #   dashboard:
       link: "/proxy/{port}/status"
+
+
+::
+	
+	jupyter labextension install dask-labextension
+	jupyter serverextension enable --py --sys-prefix dask_labextension
 
 Further Reading
 ---------------
