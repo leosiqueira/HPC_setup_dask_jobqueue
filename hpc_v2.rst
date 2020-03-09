@@ -102,9 +102,9 @@ Create a new conda environment for our pangeo work:
 
 ::
 
-    conda create -n myenv -c conda-forge -y python=3.6 \
-    jupyterlab nbserverproxy nodejs dask-jobqueue ipywidgets \
-    mpi4py xarray netcdf4 cartopy
+    conda create -n pangeolab -c conda-forge -y python=3.6 \
+    nbserverproxy jupyterlab=2.0.0 nodejs dask_labextension \
+    dask-jobqueue ipywidgets tornado==5.1.1
 
 .. note::
 
@@ -143,6 +143,12 @@ somewhere in your home directory:
     (myenv) $ which python
     ~/local/miniconda3/envs/myenv/bin/python
     
+
+::
+	
+	jupyter labextension install dask-labextension
+	jupyter serverextension enable --py --sys-prefix dask_labextension
+
 To move out of your environment,
 
 ::
