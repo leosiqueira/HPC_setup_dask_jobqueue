@@ -337,9 +337,11 @@ Let's test Dask using the basic example below by running the second cell,
 then perform some NumPy operations on the third cell,
 
 .. code:: python
+
 	y = x + x.T
 	z = y[::2, 5000:].mean(axis=1)
 	z
+
 
 .. image:: /figures/example_z.jpg
     :width: 100px
@@ -349,6 +351,7 @@ then perform some NumPy operations on the third cell,
 Up to this point, no computation was done (`lazy execution of code <https://tutorial.dask.org/01x_lazy.html>`__). You may call ``z.compute()`` when you want your result as a NumPy array. If you started ``Client()`` above then you may want to watch the status page (or the task stream panel) of the diagnostics dashboard during computation. If you have the available RAM for your dataset then you can persist data in memory. This allows future computations to be much faster, for example,
 
 .. code:: python
+
 	y = y.persist()
 
 
