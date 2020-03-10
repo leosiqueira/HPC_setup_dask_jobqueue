@@ -254,6 +254,16 @@ Then enable the extension for JupyterLab with,
     	- Validating...
       	dask_labextension 0.3.3 OK
 
+
+Another extension install, 
+
+::
+
+	(myenv) $ jupyter labextension install @jupyter-widgets/jupyterlab-manager
+	(myenv) $ jupyter lab clean
+	
+This command defaults to installing the latest version of the ``ipywidgets`` JupyterLab extension and ensure a clean reinstall of the JupyterLab extension.
+
 In our case, the Triton (Pegasus) supercomputer uses the LSF job scheduler, so within your (myenv)
 environment typing
 
