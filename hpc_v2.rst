@@ -11,7 +11,7 @@ This tutorial covers how to set up an environment to run operations in parallel 
 4. Launch a `Jupyter`_ server for your job.
 5. Connect to `JupyterLab`_ and the `Dask-Dashboard`_ from your personal computer.
 
-Although the examples on this page are target at using UMiami's `Triton <https://idsc.miami.edu/triton/>`__ supercomputer (or `Pegasus <https://idsc.miami.edu/pegasus/>`__), the concepts here should generally apply to typical HPC systems. Furthermore, the steps above primarily work for performing other parallel computing at Triton (Pegasus) that do not use the Pangeo-like python ecosystem but use distributed computing with Dask. This document assumes that you already have access to an HPC system like Triton (Pegasus), and are comfortable using the command line. 
+Although the examples on this page are target at using UMiami's `Triton <https://idsc.miami.edu/triton/>`__ supercomputer, the concepts here should generally apply to typical HPC systems. Furthermore, the steps above primarily work for performing other parallel computing in Triton that do not use an extensive python ecosystem but use distributed computing with Dask. This document assumes that you already have access to an HPC system like Triton, and are comfortable using the command line. 
 
 .. image:: /figures/bringiton.jpg
     :width: 100px
@@ -29,31 +29,22 @@ Start with creating some directories,
 
     $ mkdir -p ~/src ~/local
   
-The Miniconda distribution packages together just ``python``, ``conda``, and a small number of other packages. Its download size is around 50MB or less than a tenth of the size of Anaconda distribution (100+ packages). Moreover, the conda tool is very valuable and what we will use to set up a robust environment. Download and install Miniconda for Triton (see notes for Pegasus version),
+The Miniconda distribution packages together just ``python``, ``conda``, and a small number of other packages. Its download size is around 50MB or less than a tenth of the size of Anaconda distribution, which has 100+ packages. Moreover, the conda tool is very valuable and what we will use to set up a robust environment. Download and install Miniconda for Triton,
 
 ::
 
     $ cd ~/src
     $ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-ppc64le.sh
+
+It is recommended to verify download integrity with md5sum by running,
+ 
+::
+    $ md5sum Miniconda3-latest-Linux-ppc64le.sh
+    
+and checking the website (https://repo.anaconda.com/miniconda/) for its hash value so that you can make sure the download completed correctly. Then, you can run the installer by inncluding the bash command regardless of whether or not you are using Bash shell,
+
+::
     $ bash Miniconda3-latest-Linux-ppc64le.sh -bfp ~/local/miniconda3
-
-
-.. note:: 
-
-	*For Pegasus, use the following version:*
-    
-	::
-
-		$ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-		$ bash Miniconda3-latest-Linux-x86_64.sh -bfp ~/local/miniconda3
-               
-	*Moreover, for Pegasus, make sure you are not using the default python module by adding the following line to your*           ``~/.bashrc``,
-    
-    	::
-
-        	module unload python
-
-    	*and start another terminal, or type* ``source ~/.bashrc`` *to make this change effective for the current shell.* 
  
 This installation comprises a self-contained Python environment, with *install prefix*
 (location) ``~/local/miniconda3``, that we can manipulate safely without requiring the involvement of support services.
