@@ -107,14 +107,13 @@ This keeps your *default* channel high in priority, so that install packages wil
 Create a new conda environment for your work (here named *myenv*):
 
 ::
-
-    $ conda create -n myenv -c conda-forge -y python=3.6 \
-      nbserverproxy jupyterlab=2.0.0 nodejs dask_labextension \
-      dask-jobqueue ipywidgets tornado==5.1.1
+    $ conda create -n myenv -c conda-forge -y python=3.7 \
+      jupyterlab=2.0.0 nodejs nbserverproxy ipywidgets dask-jobqueue
+      
 
 .. note::
 
-	*IMPORTANT: For setting the diagnostics dashboard via web interface at UMiami-Triton (Pegasus) in an 			interactive (or regular) scheduled job, we need to downgrade the Tornado package for now due to an issue in V6.0. 	  Moreover, depending on your application, you may choose to remove or add conda packages to this list. For earth 	  sciences studies, Xarray is a useful choice, includind Dask and Pandas packages as dependencies, and is usually 	  combined with Scipy, Cartopy, among others.*
+	*Depending on your application, you may choose to remove or add conda packages to this list. For earth sciences studies, for example, Xarray is a useful choice, wich includes Dask and Pandas packages as dependencies, and is usually combined with Scipy, Cartopy, among others.*
 
 To see a list of all of your environments, run:
 
