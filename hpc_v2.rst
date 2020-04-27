@@ -95,7 +95,7 @@ Before creating your environment, we recommend updating your conda package manag
     
     *The above creates a* ``./condarc`` *in your home directory with this setting the first time you run it.*
 
-At this point before creating your first environment we can add the *conda-forge* channel with repositories of *conda* recipes with,
+At this point, before creating your first environment we can add the *conda-forge* channel that contains repositories of *conda* recipes with,
 
     ::
     
