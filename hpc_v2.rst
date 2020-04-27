@@ -36,14 +36,20 @@ The Miniconda distribution packages together just ``python``, ``conda``, and a s
     $ cd ~/src
     $ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-ppc64le.sh
 
+.. note::
+
+    *Triton is an IBM Power System (pp64le) and not a x86 architecture.*
+
 It is recommended to verify download integrity with md5sum by running,
  
 ::
+
     $ md5sum Miniconda3-latest-Linux-ppc64le.sh
     
-and checking the website (https://repo.anaconda.com/miniconda/) for its hash value so that you can make sure the download completed correctly. Then, you can run the installer by inncluding the bash command regardless of whether or not you are using Bash shell,
+and checking the website (https://repo.anaconda.com/miniconda/) for its valid hash value so that you can make sure the download completed correctly. Then, you can run the installer by inncluding the bash command regardless of whether or not you are using Bash shell,
 
 ::
+
     $ bash Miniconda3-latest-Linux-ppc64le.sh -bfp ~/local/miniconda3
  
 This installation comprises a self-contained Python environment, with *install prefix*
