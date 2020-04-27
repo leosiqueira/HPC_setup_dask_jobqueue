@@ -40,7 +40,7 @@ The Miniconda distribution packages together just ``python``, ``conda``, and a s
 
     *Triton is an IBM Power System (pp64le) and not a x86 architecture.*
 
-It is recommended to verify download integrity with md5sum by running,
+It is recommended to verify the download integrity with md5sum by running,
  
 ::
 
