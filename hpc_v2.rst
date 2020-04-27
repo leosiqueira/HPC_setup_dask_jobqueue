@@ -63,18 +63,17 @@ It also allows you to create isolated software environments so that we can exper
     You may also run* ``bash Miniconda3-latest-*.sh`` *to go
     through the whole installation process (and prompts) if desired.*
 
-Make the conda command available in all bash shells with,
+In our quick (and promptless) installation we need to initialize the manager after the installation process is done, first run ``source <path to conda>/bin/activate`` and then run ``conda init`` to make the ``conda`` command available in all Bash shells with,
 
 ::
 
-	$ ~/local/miniconda3/condabin/conda init
+	$ source ~/local/miniconda3/bin/activate
+	(base) $ conda init
 	
 	
 Note that this command modifies your user's ``~/.bashrc`` file. In addition,
 the ``conda`` command being made available, the ``base`` conda environment is automatically
 activated (i.e., environment variables set and all executables put on ``$PATH``). 
-
-IMPORTANT: After running ``conda init``, your shells need to be closed and restarted, or type ``source ~/.bashrc``, to make  changes effective for the current shell.
 
 Before creating your environment, we recommend updating your conda package manager with
 
