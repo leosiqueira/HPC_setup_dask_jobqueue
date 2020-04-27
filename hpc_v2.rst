@@ -201,20 +201,28 @@ The lastest `Jupyter`_ versions (v5.0 or newer) allows you to set up your passwo
 ::
    
       (myenv) $ jupyter notebook --generate-config
+      		Writing default config to: /home/$USER/.jupyter/jupyter_notebook_config.py
       (myenv) $ jupyter notebook password
+      		Wrote hashed password to /home/$USER/.jupyter/jupyter_notebook_config.json
 
 It  prompts you to create a password for the Jupyter server, and store the hashed password in your
 ``jupyter_notebook_config.json``.
 
-You also need to uncomment and set these two lines in ``~/.jupyter/jupyter_notebook_config.py``.
+You will also need to uncomment and set these three lines in ``~/.jupyter/jupyter_notebook_config.py``.
 
-First to allow remote origins:
+First to allow remote origins,
 
 ::
 
     c.NotebookApp.allow_origin = '*'
 
-and second to listen on all IPs:
+then,    
+
+::
+
+    c.NotebookApp.allow_remote_access = True
+
+and last, listen on all IPs:
 
 ::
 
