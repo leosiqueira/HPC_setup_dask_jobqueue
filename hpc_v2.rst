@@ -46,14 +46,14 @@ It is recommended to verify the download integrity with md5sum by running,
 
     $ md5sum Miniconda3-latest-Linux-ppc64le.sh
     
-and checking the website (https://repo.anaconda.com/miniconda/) for its valid hash value so that you can make sure the download completed correctly. Then, you can run the installer by inncluding the bash command regardless of whether or not you are using Bash shell,
+and checking the website (https://repo.anaconda.com/miniconda/) for its valid hash value so that you can make sure the download completed correctly. Then, you can run the installer by including the ``bash`` command regardless of whether or not you are using Bash shell,
 
 ::
 
     $ bash Miniconda3-latest-Linux-ppc64le.sh -bfp ~/local/miniconda3
  
 This installation comprises a self-contained Python environment, with *install prefix*
-(location) ``~/local/miniconda3``, that we can manipulate safely without requiring the involvement of support services.
+(location) ``~/local/miniconda3``. Here, we want to manage your own Miniconda, threfore it's installed in your home directory so that we can manipulate safely without requiring the involvement of support services.
 It also allows you to create isolated software environments so that we can experiment in the future safely. 
 
 .. note::
@@ -61,7 +61,7 @@ It also allows you to create isolated software environments so that we can exper
     *You may choose to install miniconda in any other directory, e.g., 
     if your home space quota is small, by changing the install prefix.
     You may also run* ``bash Miniconda3-latest-*.sh`` *to go
-    through the whole installation process if desired.*
+    through the whole installation process (and prompts) if desired.*
 
 Make the conda command available in all bash shells with,
 
