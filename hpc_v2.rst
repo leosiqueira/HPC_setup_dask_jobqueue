@@ -113,7 +113,7 @@ Create a new conda environment for your work (here named *myenv*):
 ::
 
     $ conda create -n myenv -c conda-forge -y python=3.7 \
-      jupyterlab=2.0.0 nodejs nbserverproxy ipywidgets dask-jobqueue
+      jupyterlab=2.0.0 nodejs nbserverproxy ipywidgets dask-jobqueue numpy
       
 
 .. note::
@@ -250,7 +250,7 @@ You can create this file and do this first import by simply running,
 
     (myenv) $ python -c 'from dask.distributed import Client'
 
-In this ``.config/dask/distributed.yaml`` file, set:
+In this ``~/.config/dask/distributed.yaml`` file, set:
 
 .. code:: python
 
@@ -269,10 +269,10 @@ Start a Jupyter Notebook Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now that we have Jupyter configured, we can start a JupyterLab (or notebook) server. In many
-cases, your system administrators require want you to run this notebook server in
+cases, your system administrators require you to run this notebook server in
 an interactive session on a compute node. Please kindly refrain from running
-resource-intensive jobs on the UMiami-Triton(Pegasus) login nodes, unless you have direct access to dedicated
-compute nodes like Umiami-Visx. Submit your production
+resource-intensive jobs on the UMiami-Triton login nodes, unless you have direct access to dedicated
+compute nodes. Submit your production
 jobs to LSF, and use the interactive queue – **not the login nodes** – for
 resource-intensive command-line processes. You may compile and test jobs on
 login nodes in any case. However, any jobs exceeding 30 minutes of run time or using excessive
@@ -283,8 +283,24 @@ one we'll follow for this tutorial.
 If you are using dask-jobqueue within Jupyter, one user-friendly solution to see the
 Diagnostics Dashboard is to use ``nbserverproxy`` or ``dask-labextension``. As the dashboard HTTP endpoint is 
 launched inside the same node as Jupyter, this is the solution for viewing it at
-UMiami-Triton (Pegasus) when running within an interactive job. You just need to have it installed
-in the Python environment you use for launching JupyterLab (or notebook), and activate it. First, we need to install the JupyterLab extension to manage Dask clusters, as well as embed Dask's dashboard plots directly into JupyterLab panes with,
+UMiami-Triton when running within an interactive job. You just need to have it installed
+in the Python environment you use for launching JupyterLab (or notebook), and activate it,
+
+::
+
+	(myenv) $ jupyter serverextension enable --py nbserverproxy
+	Enabling: nbserverproxy
+	- Writing config: /home/$USER/.jupyter
+   		- Validating...
+     		nbserverproxy  OK
+
+Then, we need to install the JupyterLab extension to manage Dask clusters, as well as embed Dask's dashboard plots directly into JupyterLab panes uisng ``pip`` with,
+
+::
+
+	pip install dask_labextension
+
+and activae it,
 
 ::
 	
