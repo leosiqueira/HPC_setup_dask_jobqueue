@@ -114,7 +114,12 @@ Create a new conda environment for your work (here named *myenv*):
 
 .. note::
 
-	*Depending on your application, you may choose to remove or add conda packages to this list. For earth sciences studies, for example, Xarray is a useful choice, wich includes Dask and Pandas packages as dependencies, and is usually combined with Scipy, Cartopy, among others.*
+	*The above creates a conda environment with the latest Python 3.7.x and five packages needed for the examples below. It will resolve the dependencies altogether and avoid further conflicts (recommended). The environment will be created at ``~/.conda/envs``. Depending on your application, you may choose to remove or add conda packages to this list. For earth sciences studies, for example, Xarray is a useful choice, wich includes Dask and Pandas packages as dependencies, and is usually combined with Scipy, Cartopy, among others:*
+	
+	::
+	
+	    $ conda create -n <environment name> python=<version> <package1> <package2> <...>
+	
 
 To see a list of all of your environments, run:
 
@@ -134,14 +139,14 @@ Let's activate your environment with,
 
    $ conda activate myenv
 
-Your prompt should now look something like this (note the myenv environment name before the prompt):
+Your prompt should now look something like this (note the ``(<environment>)`` name before the prompt):
 
 ::
 
     (myenv) $
 
 And if you ask where your Python command lives, it should direct you to
-somewhere in your home directory:
+somewhere in your *home* (or *install prefix*) directory:
 
 ::
 
@@ -158,6 +163,30 @@ To move out of your environment,
 .. note::
 
 	*see* `Managing Environments <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html>`__ *for more information.*
+	
+	
+To install packages in your environment,
+
+::
+
+   (myenv)$ conda install <package>
+
+
+or ``conda install <package>=<version>`` if you want a specific version. If conda finds the package from the channels listed in the ``./condarc`` file, it will download and install the package, otherwise you can search in Anaconda Cloud and choose Platform ``linux-ppc64le`` (for UMiami-Triton). Click on the name of the selected package, and the detail page will show you the specific channel to install from, for example,
+
+::
+
+	(<environment>)$ conda install -c <channel> <package>
+	
+
+If the package is still not found, you may try
+
+::
+
+	(<environment>)$ pip install <package>
+
+
+Caveat: Issues may arise when using pip and conda together. When combining conda and pip, it is best to use an isolated conda environment. Only after conda has been used to install as many packages as possible should pip be used to install any remaining software. If modifications are needed to the environment, it is best to create a new environment rather than running conda after pip.	
 	
 Configure Jupyter
 -----------------
