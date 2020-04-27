@@ -97,9 +97,10 @@ Before creating your environment, we recommend updating your conda package manag
 
 At this point, before creating your first environment we can add the *conda-forge* channel that contains repositories of *conda* recipes with,
 
-    ::
+::
     
-	  $ conda config --append channels conda-forge
+	$ conda config --append channels conda-forge
+	
 	  
 This keeps your *default* channel high in priority, so that install packages will be searched on your *default* before going to *conda-forge*.
 
