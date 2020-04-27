@@ -84,13 +84,14 @@ Before creating your environment, we recommend updating your conda package manag
 .. note:: 
 
     *Depending on if you chose to initialize Miniconda in your* ``~/.bashrc``
-    *at the end of the installation process (or like in the above), a* ``conda update`` *activates a* ``base``
+    *at the end of the installation process (or like in the above), a* ``conda init`` *activates a* ``base``
     *environment by default. If you wish to prevent conda from activating the* ``base``
-    *environment at shell initialization (recommended), use*
+    *environment at shell initialization, so that each shell session will not have the base environment activated (recommended), use*
     
     ::
     
            $ conda config --set auto_activate_base false
+	   
     
     *The above creates a* ``./condarc`` *in your home directory with this setting the first time you run it.*
 
