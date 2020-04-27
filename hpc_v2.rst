@@ -107,6 +107,7 @@ This keeps your *default* channel high in priority, so that install packages wil
 Create a new conda environment for your work (here named *myenv*):
 
 ::
+
     $ conda create -n myenv -c conda-forge -y python=3.7 \
       jupyterlab=2.0.0 nodejs nbserverproxy ipywidgets dask-jobqueue
       
