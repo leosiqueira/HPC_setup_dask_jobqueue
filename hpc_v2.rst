@@ -95,7 +95,7 @@ Before creating your environment, we recommend updating your conda package manag
     
     *The above creates a* ``./condarc`` *in your home directory with this setting the first time you run it.*
 
-Create a new conda environment for your work:
+Create a new conda environment for your work (here named *myenv*):
 
 ::
 
