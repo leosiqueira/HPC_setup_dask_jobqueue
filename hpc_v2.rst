@@ -99,10 +99,14 @@ At this point, before creating your first environment we can add the *conda-forg
 
 ::
     
-	$ conda config --append channels conda-forge
+	$ conda config --add channels conda-forge
 	
 	  
-This keeps your *default* channel high in priority, so that install packages will be searched on your *default* before going to *conda-forge*.
+This keeps your *default* channel, but puts *conda-forge* high in priority, so that install packages will be searched on *conda-forge* before going to *default*. 
+
+.. note::
+
+	*The conda-forge and defaults channels are not 100% compatible and this can lead to errors when the install environment mixes packages from multiple channels. The approach here is to ensure that the dependencies will come from the conda-forge channel (see also notes on using* ``pip`` *to install packages).*
 
 Create a new conda environment for your work (here named *myenv*):
 
@@ -185,8 +189,9 @@ If the package is still not found, you may try
 
 	(<environment>)$ pip install <package>
 
+.. note::
 
-Caveat: Issues may arise when using pip and conda together. When combining conda and pip, it is best to use an isolated conda environment. Only after conda has been used to install as many packages as possible should pip be used to install any remaining software. If modifications are needed to the environment, it is best to create a new environment rather than running conda after pip.	
+	*Issues may arise when using pip and conda together to install packages. You rather use an isolated conda environment, and only after conda has been used to install as many packages as possible should pip be used to install any remaining software. If further modifications are needed to the environment, it is best to create a new environment rather than running conda after pip.*	
 	
 Configure Jupyter
 -----------------
