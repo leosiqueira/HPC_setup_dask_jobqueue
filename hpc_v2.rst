@@ -401,7 +401,7 @@ To access the Diagnostics Dashboard you may open a separate tab an go to ``http:
     :align: center
     :height: 50px
 
-Let's test Dask using the basic example below by running the following cells. We'll create a 2D array with 75000*75000 elements and 45GB in size (sloghtly larger than the total 40GB total memory),
+Let's test Dask using the basic example below by running the following cells. We'll create a 2D array with 75000*75000 elements and 45GB in size (slightly larger than the total 40GB memory available),
 
 .. code:: python
 
@@ -426,7 +426,29 @@ then compute the approximate singular value decomposition of this large array on
 
 	u, s, v = da.linalg.svd_compressed(data, k= 10) # Randomly compressed rank-k thin Singular Value Decomposition.
 
-Up to this point, no computation was done (`lazy execution of code <https://tutorial.dask.org/01x_lazy.html>`__). You may call ``v.compute()`` when you want your result as a NumPy array. If you started ``Client()`` above then you may want to watch the status page (or the task progress, stream, or worker memory panel) of the diagnostics dashboard during computation. If you have the available RAM for your dataset (here is quite tight for the computation) then you can persist data in memory. This allows future computations to be much faster, for example,
+Up to this point, no computation was done (`lazy execution of code <https://tutorial.dask.org/01x_lazy.html>`__). You may call ``v.compute()`` when you want your right singular vector result as a NumPy array. If you started ``Client()`` above then you may want to watch the status page (or the task progress, stream, or worker memory panel) of the diagnostics dashboard during computation. You may check your SVD decompostion,
+
+.. code:: python
+
+	print("Left Singular Vectors:")
+	print(u,  "\n")
+
+	print("Singular Values:") 
+	print(np.diag(s), "\n")
+
+	print("Right Singular Vectors:") 
+	print(v,  "\n")
+	
+	Left Singular Vectors:
+	dask.array<getitem, shape=(75000, 10), dtype=float64, chunksize=(5000, 10), chunktype=numpy.ndarray> 
+
+	Singular Values:
+	dask.array<diag, shape=(10, 10), dtype=float64, chunksize=(10, 10), chunktype=numpy.ndarray> 
+
+	Right Singular Vectors:
+	dask.array<getitem, shape=(10, 75000), dtype=float64, chunksize=(10, 5000), chunktype=numpy.ndarray> 
+
+If you have the available RAM for your dataset (here is quite tight for the computation) then you can persist data in memory. This allows future computations to be much faster, for example,
 
 .. code:: python
 
