@@ -11,12 +11,14 @@ This tutorial covers how to set up an environment to run operations in parallel 
 4. Launch a `Jupyter`_ server for your job.
 5. Connect to `JupyterLab`_ and the `Dask-Dashboard`_ from your personal computer.
 
-Although the examples on this page are target at using UMiami's `Triton <https://idsc.miami.edu/triton/>`__ supercomputer, the concepts here should generally apply to typical HPC systems. Furthermore, the steps above primarily work for performing other parallel computing in Triton that do not use an extensive python ecosystem but use distributed computing with Dask. This document assumes that you already have access to an HPC system like Triton, and are comfortable using the command line. 
+Although the examples on this page are target at using UMiami's `Triton <https://idsc.miami.edu/triton/>`__ supercomputer, the concepts here should generally apply to typical HPC systems. Furthermore, the steps above primarily work for performing other parallel computing in Triton that do not use an extensive python ecosystem but use distributed computing with Dask. This document assumes that you already have access to an HPC system like Triton, and are comfortable using the command line.
 
 .. image:: /figures/bringiton.jpg
     :width: 100px
     :align: center
     :height: 50px
+
+Disclaimer: The views, information, or opinions expressed in this tutorial are solely those of the author and do not necessarily represent those of University of Miami, University of Miami - Institute for Data Science and Computing (IDSC), and its employees.
 
 Let's log into your HPC system and get started.
 
