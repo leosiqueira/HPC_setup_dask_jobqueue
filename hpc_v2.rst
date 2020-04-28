@@ -18,7 +18,7 @@ Although the examples on this page are target at using UMiami's `Triton <https:/
     :align: center
     :height: 50px
 
-Disclaimer: The views, information, or opinions expressed in this tutorial are solely those of the author and do not necessarily represent those of University of Miami, University of Miami - Institute for Data Science and Computing (IDSC), and its employees.
+Disclaimer: The views, information, or opinions expressed in this tutorial are solely those of the author and do not necessarily represent those of University of Miami, University of Miami - Institute for Data Science and Computing (IDSC), and its employees (see oficial documentation at https://acs-docs.readthedocs.io/index.html).
 
 Let's log into your HPC system and get started.
 
