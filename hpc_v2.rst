@@ -401,39 +401,38 @@ To access the Diagnostics Dashboard you may open a separate tab an go to ``http:
     :align: center
     :height: 50px
 
-Let's test Dask using the basic example below by running the second cell,
+Let's test Dask using the basic example below by running the following cells. We'll create a 2D array with 75000*75000 elements and 45GB in size (sloghtly larger than the total 40GB total memory),
 
 .. code:: python
 
 	import dask.array as da
-	x = da.random.random((10000, 10000), chunks=(1000, 1000))
-	x
+        import numpy as np
+	
+.. code:: python
 
-.. image:: /figures/example_x.jpg
+	size_in_bytes = 0.6e6
+	size = int(size_in_bytes / 8)
+	data = da.random.uniform(0, 1, size=( size , size ), chunks=(5000, 5000))
+	data
+
+.. image:: /figures/example.jpg
     :width: 100px
     :align: center
     :height: 50px
     
-then perform some NumPy operations on the third cell,
+then compute the approximate singular value decomposition of this large array on the next cell. This algorithm is generally faster than the normal algorithm, but does not provide exact results, where ``k`` is the rank of the desired compressed rank-k SVD decomposition, 
 
 .. code:: python
 
-	y = x + x.T
-	z = y[::2, 5000:].mean(axis=1)
-	z
+	u, s, v = da.linalg.svd_compressed(data, k= 10) # Randomly compressed rank-k thin Singular Value Decomposition.
 
-
-.. image:: /figures/example_z.jpg
-    :width: 100px
-    :align: center
-    :height: 50px
-
-Up to this point, no computation was done (`lazy execution of code <https://tutorial.dask.org/01x_lazy.html>`__). You may call ``z.compute()`` when you want your result as a NumPy array. If you started ``Client()`` above then you may want to watch the status page (or the task stream panel) of the diagnostics dashboard during computation. If you have the available RAM for your dataset then you can persist data in memory. This allows future computations to be much faster, for example,
+Up to this point, no computation was done (`lazy execution of code <https://tutorial.dask.org/01x_lazy.html>`__). You may call ``v.compute()`` when you want your result as a NumPy array. If you started ``Client()`` above then you may want to watch the status page (or the task progress, stream, or worker memory panel) of the diagnostics dashboard during computation. If you have the available RAM for your dataset (here is quite tight for the computation) then you can persist data in memory. This allows future computations to be much faster, for example,
 
 .. code:: python
 
-	y = y.persist()
+	v = v.persist()
 
+If you don't, you may save intermediate results to disk and then load them again for further computations. Again, in theory, Dask should be able to do the computation in a streaming fashion, but in practice this is a fail case for the Dask scheduler, because it tries to keep every chunk of an array that it computes in memory.
 
 Further Reading
 ---------------
