@@ -300,7 +300,7 @@ Then, we need to install the JupyterLab extension to manage Dask clusters, as we
 
 	pip install dask_labextension
 
-and activae it,
+and install the extension for Jupyter,
 
 ::
 	
@@ -316,8 +316,11 @@ Then enable the extension for JupyterLab with,
 	Enabling: dask_labextension
 	- Writing config: /home/$USER/local/miniconda3/envs/myenv/etc/jupyter
     	- Validating...
-      	dask_labextension 0.3.3 OK
+      	dask_labextension 2.0.1 OK
 
+.. note::
+
+*Standard online guidelines for enabling dask-labextension did not work in UMiami-Triton, changed to what works for now.*
 
 Another extension install, 
 
@@ -328,7 +331,7 @@ Another extension install,
 	
 This command defaults to installing the latest version of the ``ipywidgets`` JupyterLab extension and ensure a clean reinstall of the JupyterLab extension.
 
-In our case, the Triton (Pegasus) supercomputer uses the LSF job scheduler, so within your (myenv)
+In our case, the Triton supercomputer has an ``interactive`` queue, so within your (myenv)
 environment typing
 
 ::
@@ -372,12 +375,12 @@ find a JupyterLab server running!
   
 Launch Dask with dask-jobqueue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-From within your JupyterLab you can start a cluster by creating a Python3 Jupyter Notebook and run in the first cell
+From within your JupyterLab you can start a local cluster by creating a Python3 Jupyter Notebook and run in the first cell
 
 .. code:: python
 
     from dask.distributed import Client, LocalCluster
-    cluster = LocalCluster(n_workers=3, memory_limit='300MB', processes=True, threads_per_worker=4)
+    cluster = LocalCluster(n_workers=16, memory_limit='2.5GB', processes=True, threads_per_worker=4)
     client = Client(cluster)
     client
 
@@ -387,6 +390,9 @@ and it will output,
     :width: 100px
     :align: center
     :height: 50px
+
+
+Triton (IBM POWER System AC922) has at least 16 cores per processor, so the rule of thumb for threads per Dask worker is to choose the square root of the number of cores per processor. For Triton for example, this would mean that one could assign 4 threads per worker. We discuss the choice of workers, threads, and dask chunksize in a separate example (see ).
 
 To access the Diagnostics Dashboard you may open a separate tab an go to ``http://localhost:8890/proxy/8787/status`` or have the diagnostics embeded in the JupyterLab panes. For the latter, you click on the ``dasklab-extension`` symbol on the left-hand sidebar and paste ``http://localhost:8890/proxy/8787`` in the ``DASK BASHBOARD URL`` field. The grey buttons become available (orange) and they open new panes within JupyterLab like below, 
 
