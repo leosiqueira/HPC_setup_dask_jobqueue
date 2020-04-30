@@ -394,7 +394,7 @@ and it will output,
     :height: 50px
 
 
-Triton (IBM POWER System AC922) has at least 16 cores per processor, so the rule of thumb for threads per Dask worker is to choose the square root of the number of cores per processor. For Triton for example, this would mean that one could assign 4 to 5 threads per worker. We discuss the choice of workers, threads, and dask chunksize in a separate example (see `Monte Carlo estimate of Pi example <https://github.com/leosiqueira/HPC_ssh_keys_setup_dask_jobqueue/MC_example.html>`__).
+Triton (IBM POWER System AC922) has at least 16 cores per processor, so the rule of thumb for threads per Dask worker is to choose the square root of the number of cores per processor. For Triton for example, this would mean that one could assign 4 to 5 threads per worker. We discuss the choice of workers, threads, and dask chunksize in a separate example (see `Monte Carlo estimate of Pi example <https://github.com/leosiqueira/HPC_ssh_keys_setup_dask_jobqueue/mc_example.html>`__).
 
 To access the Diagnostics Dashboard you may open a separate tab an go to ``http://localhost:8890/proxy/8787/status`` or have the diagnostics embeded in the JupyterLab panes. For the latter, you click on the ``dasklab-extension`` symbol on the left-hand sidebar and paste ``http://localhost:8890/proxy/8787`` in the ``DASK BASHBOARD URL`` field. The grey buttons become available (orange) and they open new panes within JupyterLab like below, 
 
