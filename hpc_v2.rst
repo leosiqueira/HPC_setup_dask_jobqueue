@@ -458,7 +458,7 @@ If you have the available RAM for your dataset (here is quite tight for the comp
 
 If you don't, you may save intermediate results to disk and then load them again for further computations. Again, in theory, Dask should be able to do the computation in a streaming fashion, but in practice this is a fail case for the Dask scheduler, because it tries to keep every chunk of an array that it computes in memory.
 
-Triton Dask_jobqueue and LSFCluster
+Triton Dask_jobqueue, LSFCluster, and JupyterHub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 TODO
