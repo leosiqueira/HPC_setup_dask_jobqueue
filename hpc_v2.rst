@@ -426,7 +426,7 @@ then compute the approximate singular value decomposition of this large array on
 
 .. code:: python
 
-	u, s, v = da.linalg.svd_compressed(data, k= 10) # Randomly compressed rank-k thin Singular Value Decomposition.
+	u, s, v = da.linalg.svd_compressed(data, k= 10) # Randomly compressed rank-k SVD.
 
 Up to this point, no computation was done (`lazy execution of code <https://tutorial.dask.org/01x_lazy.html>`__). You may call ``v.compute()`` when you want your right singular vector result as a NumPy array. If you started ``Client()`` above then you may want to watch the status page (or the task progress, stream, or worker memory panel) of the diagnostics dashboard during computation. You may check your SVD decompostion,
 
