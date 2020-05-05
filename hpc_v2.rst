@@ -461,7 +461,7 @@ If you don't, you may save intermediate results to disk and then load them again
 Triton Dask_jobqueue, LSFCluster, and JupyterHub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Here, we'll create a LSF cluster and have a look at the job-script used to start workers on the Triton scheduler. This can be done either within a JupyterLab interactive job or JupyterHub session (check resources beforehand fo the latter). Basically, each job is going to run a dask-worker command and each dask-worker needs to run on a single node. 
+Here, we'll create a LSF cluster and look in to the job-script used to start workers on the Triton scheduler. This can be done either within a JupyterLab interactive job like above or in a JupyterHub session (check resources beforehand for the latter). Basically, each job is going to run a dask-worker command and each dask-worker needs to run on a single node. 
 
 Let's start by importing a few modules and instantiate a cluster with a single worker on a single node,
 
@@ -484,7 +484,7 @@ Let's start by importing a few modules and instantiate a cluster with a single w
 
 .. note::
 
-	*Workers out of memory write data to disk, best is fast locally attached storage.*
+	*Workers out of memory write data to disk, using a fast locally attached storage is recommended.*
 
 The information above specify the characteristics of a single job or a single compute node, rather than the total amount of cores or memory that you want for your computation as a whole. Moreover, It hasn’t actually launched any jobs yet. The cluster generates an usual LSF job script and submits that an appropriate number of times to the job queue. You can see the job script it will generate with,
 
