@@ -523,7 +523,7 @@ Let's restart the kernel (which kills previous jobs) and move to create 1 worker
                      walltime="00:10",
                      death_timeout=60,
                      interface='ib0',
-                     local_directory="/scratch/cpp/" + os.environ["USER"] + "/tmp")
+                     local_directory="/scratch/<YOUR_PROJECT>" + os.environ["USER"] + "/tmp")
 		     
 	cluster.scale(jobs=10)
 	client = Client(cluster)
@@ -563,18 +563,18 @@ Let's say we want to keep the computation within a single node,
                      walltime="00:10",
                      death_timeout=60,
                      interface='ib0',
-                     local_directory="/scratch/cpp/" + os.environ["USER"] + "/tmp")
+                     local_directory="/scratch/<YOUR_PROJECT>" + os.environ["USER"] + "/tmp")
 
-	cluster.scale(1)
+	cluster.scale(jobs=1)
 	client = Client(cluster)
 	client
 
 
 .. note::
 
-	*The above gives 1 job on a single node;the job uses 10 worker processes and 4 threads; total memory is 20GB x 1 (job) = 20GB; Memory per worker is 2GB! and total cores (workers x threads) = 40*
+	*The above gives 1 job on a single node; the job uses 10 worker processes and 4 threads; total memory is 20GB x 1 (job) = 20GB; memory per worker is 2GB! and total cores (workers x threads) = 40.*
 	
-Now, let's say we need to double the number of workers, so we can scale up the job defined above with,
+Now, let's say we need to scale up the computation and double the number of workers. So, we can scale up the job defined above with,
 
 
 .. code:: python
@@ -589,9 +589,38 @@ Now, let's say we need to double the number of workers, so we can scale up the j
 
 	client
 	
-So, now we have 2 jobs running, a total of 20 workers (with 4 threads), a total of 80 cores, and 40GB of total memory (still 2GB per worker). 	
+Now we have 2 jobs running (on 2 nodes), a total of 20 workers (with 4 threads), a total of 80 cores, and 40GB of total memory (still 2GB per worker). 	
 
+Lastly, if you want to get 40 cores on 5 different nodes, and let LSF handle the rest,
 
+.. code:: python
+
+	cluster = LSFCluster(
+    	cores=40,
+    	queue='normal',
+    	memory="4 GB",
+    	walltime="00:10",
+    	death_timeout=60,
+    	interface='ib0',
+        local_directory="/scratch/<YOUR_PROJECT>" + os.environ["USER"] + "/tmp")
+
+	cluster.scale(jobs=5)  # ask for 5 jobs
+
+.. code:: python
+
+	print(cluster.job_script())
+	#!/usr/bin/env bash
+
+	#BSUB -J dask-worker
+	#BSUB -q normal
+	#BSUB -n 40
+	#BSUB -R "span[hosts=1]"
+	#BSUB -M 4000
+	#BSUB -W 00:10
+
+	/home/<user>/local/miniconda3/envs/myenvp/bin/python -m distributed.cli.dask_worker tcp://10.11.3.51:38897 --nthreads 5 --nprocs 8 --memory-limit 500.00MB --name name --nanny --death-timeout 60 --local-directory /scratch/<project>/<user>/tmp --interface ib0
+	
+This last case has 5 jobs running (on 5 different nodes). Each job has a total of 40 workers (8 processes with 5 threads). The total number of cores is 200, and 40GB of total memory (still 2GB per worker). 	
 
 Further Reading
 ---------------
