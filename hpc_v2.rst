@@ -512,7 +512,7 @@ For the full computation, you will then ask for a number of jobs using the scale
 
 You can check that you have one job submitted to a single node (EXEC_HOST 40*t0XX) by typping ``bjobs`` at a Triton terminal. Typically, for heavy Numpy workloads a low number of processes is best, while for pure Python workloads a high number of processes (like one process per two cores) is best. If you are unsure then you might want to experiment a bit (see `Monte Carlo estimate of Pi example <https://github.com/leosiqueira/HPC_ssh_keys_setup_dask_jobqueue/blob/master/mc_example.ipynb>`__), or just choose a moderate number, like one process per four or five cores.
 
-Let's restart the kernel (which kills previous jobs) and move to 10 workers (in 10 LSF jobs). So, if you want to get 40 cores again, but on different nodes (with 4 cores per node, and same total memory, which implies less memory per worker),
+Let's restart the kernel (which kills previous jobs) and move to create 1 worker in 10 LSF jobs. So, if you want to get 40 cores again, but on different nodes (with 4 cores per node, and same total memory, which implies less memory per worker),
 
 .. code:: python
 
@@ -543,13 +543,56 @@ Let's restart the kernel (which kills previous jobs) and move to 10 workers (in 
 
 	/home/<user>/local/miniconda3/envs/myenv/bin/python -m distributed.cli.dask_worker tcp://10.11.3.51:41171 --nthreads 4 --memory-limit 2.00GB --name name --nanny --death-timeout 60 --local-directory /scratch/<project>/<user>/tmp --interface ib0
 
+Each of these 10 jobs are sent to the LSF job queue independently and, once that job starts, a dask-worker process will start up and connect back to the scheduler running within this process. You can check that you have 10 jobs submitted to different nodes.
+
 .. note::
 
-	*The above gives 10 jobs (on different nodes); each job uses 1 worker process and 4 threads; memory per worker is now 2GB! But Total memory is still 2GB x 10 (jobs) = 20GB; total cores  is still 40.*
+	*The above gives 10 jobs (on different nodes); each job uses 1 worker process and 4 threads; memory per worker is now 2GB! But total memory is still 2GB x 10 (jobs) = 20GB; total cores  is still 40.*
 	
 	
+At this point it's important to make clear that a worker is a Python object and node in a dask Cluster that serves two purposes: serve data, and perform computations. Jobs are resources submitted to, and managed by, the LSF job queueing system. In dask-jobqueue, a single job may include one or more workers.
+
+Let's say we want to keep the computation within a single node,
+
+.. code:: python
+
+	cluster = LSFCluster(cores=40,
+                     processes=10,
+                     memory='20GB',
+                     queue='normal',
+                     walltime="00:10",
+                     death_timeout=60,
+                     interface='ib0',
+                     local_directory="/scratch/cpp/" + os.environ["USER"] + "/tmp")
+
+	cluster.scale(1)
+	client = Client(cluster)
+	client
+
+
+.. note::
+
+	*The above gives 1 job on a single node;the job uses 10 worker processes and 4 threads; total memory is 20GB x 1 (job) = 20GB; Memory per worker is 2GB! and total cores (workers x threads) = 40*
 	
+Now, let's say we need to double the number of workers, so we can scale up the job defined above with,
+
+
+.. code:: python
+
+	new_num_workers = 2 * len(cluster.scheduler.workers)
+	print(f"Scaling from {len(cluster.scheduler.workers)} to {new_num_workers} workers.")
+	scaling from 10 to 20 workers
 	
+	cluster.scale(new_num_workers)
+	
+	sleep(10)
+
+	client
+	
+So, now we have 2 jobs running, a total of 20 workers (with 4 threads), a total of 80 cores, and 40GB of total memory (still 2GB per worker). 	
+
+
+
 Further Reading
 ---------------
 
