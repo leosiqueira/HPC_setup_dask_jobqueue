@@ -547,7 +547,7 @@ Each of these 10 jobs are sent to the LSF job queue independently and, once that
 
 .. note::
 
-	*The above gives 10 jobs (on different nodes); each job uses 1 worker process and 4 threads; memory per worker is now 2GB! But total memory is still 2GB x 10 (jobs) = 20GB; total cores  is still 40.*
+	*The above gives 10 jobs (on different nodes); each job uses 1 worker process and 4 threads; memory limit per worker is now 2GB! But total memory is still 2GB x 10 (jobs) = 20GB; total cores  is still 40.*
 	
 	
 At this point it's important to make clear that a worker is a Python object and node in a dask Cluster that serves two purposes: serve data, and perform computations. Jobs are resources submitted to, and managed by, the LSF job queueing system. In dask-jobqueue, a single job may include one or more workers.
