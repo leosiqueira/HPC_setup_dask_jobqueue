@@ -484,7 +484,7 @@ Let's start by importing a few modules and instantiate a cluster with a single w
 
 .. note::
 
-	*Workers out of memory write data to disk, using a fast locally attached storage is recommended.*
+	*Workers out of memory write data to disk, using a fast locally attached storage (\scratch) is recommended.*
 
 The information above specify the characteristics of a single job or a single compute node, rather than the total amount of cores or memory that you want for your computation as a whole. Moreover, It hasn’t actually launched any jobs yet. The cluster generates an usual LSF job script and submits that an appropriate number of times to the job queue. You can see the job script it will generate with,
 
