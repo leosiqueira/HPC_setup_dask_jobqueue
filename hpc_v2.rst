@@ -620,7 +620,7 @@ Lastly, if you want to get 40 cores on 5 different nodes, and let LSF handle the
 
 	/home/<user>/local/miniconda3/envs/myenv/bin/python -m distributed.cli.dask_worker tcp://10.11.3.51:35737 --nthreads 5 --nprocs 8 --memory-limit 2.00GB --name name --nanny --death-timeout 60 --local-directory /scratch/<project>/<user>/tmp --interface ib0
 	
-This last case has 5 jobs running (on 5 different nodes). Each job has a total of 40 workers (8 processes with 5 threads). The total number of cores is 200, and 80GB of total (16GB x 5jobs) memory (with 2GB per worker). 
+This last case has 5 jobs running (on 5 different nodes). Each job has a total of 40 workers (8 processes with 5 threads). The total number of cores is 200, and 80GB of total (16GB x 5 jobs) memory, with 2GB per worker). 
 
 Finally, it’s possible that not all workers arrive to start computing or it may take a while to get through, depending if the job queue is busy or not. In practice since dask-jobqueue submits many small jobs rather than a single large one workers are often able to start relatively quickly, although this will depend on the state of your cluster’s job queue.
 
