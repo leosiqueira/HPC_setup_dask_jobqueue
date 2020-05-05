@@ -598,7 +598,7 @@ Lastly, if you want to get 40 cores on 5 different nodes, and let LSF handle the
 	cluster = LSFCluster(
     	cores=40,
     	queue='normal',
-    	memory="4 GB",
+    	memory="16 GB",
     	walltime="00:10",
     	death_timeout=60,
     	interface='ib0',
@@ -615,12 +615,18 @@ Lastly, if you want to get 40 cores on 5 different nodes, and let LSF handle the
 	#BSUB -q normal
 	#BSUB -n 40
 	#BSUB -R "span[hosts=1]"
-	#BSUB -M 4000
+	#BSUB -M 16000
 	#BSUB -W 00:10
 
-	/home/<user>/local/miniconda3/envs/myenvp/bin/python -m distributed.cli.dask_worker tcp://10.11.3.51:38897 --nthreads 5 --nprocs 8 --memory-limit 500.00MB --name name --nanny --death-timeout 60 --local-directory /scratch/<project>/<user>/tmp --interface ib0
+	/home/<user>/local/miniconda3/envs/myenv/bin/python -m distributed.cli.dask_worker tcp://10.11.3.51:35737 --nthreads 5 --nprocs 8 --memory-limit 2.00GB --name name --nanny --death-timeout 60 --local-directory /scratch/<project>/<user>/tmp --interface ib0
 	
-This last case has 5 jobs running (on 5 different nodes). Each job has a total of 40 workers (8 processes with 5 threads). The total number of cores is 200, and 40GB of total memory (still 2GB per worker). 	
+This last case has 5 jobs running (on 5 different nodes). Each job has a total of 40 workers (8 processes with 5 threads). The total number of cores is 200, and 80GB of total (16GB x 5jobs) memory (with 2GB per worker). 
+
+Finally, it’s possible that not all workers arrive to start computing or it may take a while to get through, depending if the job queue is busy or not. In practice since dask-jobqueue submits many small jobs rather than a single large one workers are often able to start relatively quickly, although this will depend on the state of your cluster’s job queue.
+
+.. note::
+
+The dashboard is still failing to forward correctly using LSFCluster and JupyterHub in Triton. More investigation on connecting to the nodes IPs is required at the moment (TODO). 
 
 Further Reading
 ---------------
