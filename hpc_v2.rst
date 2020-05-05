@@ -461,8 +461,95 @@ If you don't, you may save intermediate results to disk and then load them again
 Triton Dask_jobqueue, LSFCluster, and JupyterHub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+Here, we'll create a LSF cluster and have a look at the job-script used to start workers on the Triton scheduler. This can be done either within a JupyterLab interactive job or JupyterHub session (check resources beforehand fo the latter). Basically, each job is going to run a dask-worker command and each dask-worker needs to run on a single node. 
 
+Let's start by importing a few modules and instantiate a cluster with a single worker on a single node,
+
+.. code:: python
+	
+	from dask_jobqueue import LSFCluster
+	from dask.distributed import Client
+	import os
+
+.. code:: python
+
+	cluster = LSFCluster(cores=40, 	# Total cores = 40
+                     processes=1, 	# Job uses 1 worker process and 40 threads 
+                     memory='20GB', 	# Memory per worker is 20GB; Total memory is 20GB * 1 (jobs) = 20GB
+                     queue='normal',
+                     walltime="00:10",
+                     death_timeout=60,
+                     interface='ib0', 	# Fast InfiniBand
+                     local_directory="/scratch/<YOUR_PROJECT>" + os.environ["USER"] + "/tmp")
+
+.. note::
+
+	*Workers out of memory write data to disk, best is fast locally attached storage.*
+
+The information above specify the characteristics of a single job or a single compute node, rather than the total amount of cores or memory that you want for your computation as a whole. Moreover, It hasn’t actually launched any jobs yet. The cluster generates an usual LSF job script and submits that an appropriate number of times to the job queue. You can see the job script it will generate with,
+
+.. code:: python
+
+	print(cluster.job_script())
+	#!/usr/bin/env bash
+
+	#BSUB -J dask-worker
+	#BSUB -q normal
+	#BSUB -n 40
+	#BSUB -R "span[hosts=1]"
+	#BSUB -M 20000
+	#BSUB -W 00:10
+
+	/home/<user>/local/miniconda3/envs/myenv/bin/python -m distributed.cli.dask_worker tcp://10.11.3.51:41481 --nthreads 40 --memory-limit 20.00GB --name name --nanny --death-timeout 60 --local-directory /scratch/<project>/<user>/tmp --interface ib0
+
+For the full computation, you will then ask for a number of jobs using the scale command:
+
+.. code:: python
+
+	cluster.scale(jobs=1) # 1 job on a single node
+	client = Client(cluster)
+	client
+
+You can check that you have one job submitted to a single node (EXEC_HOST 40*t0XX) by typping ``bjobs`` at a Triton terminal. Typically, for heavy Numpy workloads a low number of processes is best, while for pure Python workloads a high number of processes (like one process per two cores) is best. If you are unsure then you might want to experiment a bit (see `Monte Carlo estimate of Pi example <https://github.com/leosiqueira/HPC_ssh_keys_setup_dask_jobqueue/blob/master/mc_example.ipynb>`__), or just choose a moderate number, like one process per four or five cores.
+
+Let's restart the kernel (which kills previous jobs) and move to 10 workers (in 10 LSF jobs). So, if you want to get 40 cores again, but on different nodes (with 4 cores per node, and same total memory, which implies less memory per worker),
+
+.. code:: python
+
+	cluster = LSFCluster(cores=4,
+                     processes=1,
+                     memory='2GB',
+                     queue='normal',
+                     walltime="00:10",
+                     death_timeout=60,
+                     interface='ib0',
+                     local_directory="/scratch/cpp/" + os.environ["USER"] + "/tmp")
+		     
+	cluster.scale(jobs=10)
+	client = Client(cluster)
+	client
+
+.. code:: python
+
+	print(cluster.job_script())
+	#!/usr/bin/env bash
+
+	#BSUB -J dask-worker
+	#BSUB -q normal
+	#BSUB -n 4
+	#BSUB -R "span[hosts=1]"
+	#BSUB -M 2000
+	#BSUB -W 00:10
+
+	/home/<user>/local/miniconda3/envs/myenv/bin/python -m distributed.cli.dask_worker tcp://10.11.3.51:41171 --nthreads 4 --memory-limit 2.00GB --name name --nanny --death-timeout 60 --local-directory /scratch/<project>/<user>/tmp --interface ib0
+
+.. note::
+
+	*The above gives 10 jobs (on different nodes); each job uses 1 worker process and 4 threads; memory per worker is now 2GB! But Total memory is still 2GB x 10 (jobs) = 20GB; total cores  is still 40.*
+	
+	
+	
+	
 Further Reading
 ---------------
 
